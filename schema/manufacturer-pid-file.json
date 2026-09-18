@@ -24,6 +24,13 @@
         "string",
         "null"
       ]
+    },
+    "wanted": {
+      "description": "PIDs this brand's fixtures list but will not describe, and that no\ntable names — the library's own to-do list, per brand.\n\nA bench ignores these: they name nothing, so nothing changes in a\nreport. They are here for the curator with a manual open, and they\nride on the table file because a capture is one file and a pull\nrequest proposing it is one click. A fixture that describes nothing\nbut lists ten private PIDs is the most useful thing a tech can send\nand used to be the one capture that produced no file at all.",
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/HexU16"
+      }
     }
   },
   "required": [

@@ -70,6 +70,23 @@ the file over before opening a PR; you are publishing it.
 ## A note on what is missing
 
 If a fixture lists a PID and refuses to describe it, and no manual documents
-it, the honest answer is to leave it out. An undescribed PID shows up in a
-report as raw hex, which is a true statement about the fixture. A guessed name
-is a false one, and it will be believed by the next person to read it.
+it, the honest answer is to leave it *unnamed* — but not to leave it out. A
+guessed name is a false statement about the fixture, and the next person to
+read it will believe it. The PID number is a true one.
+
+Put those in `wanted`:
+
+```json
+{
+  "manufacturer_id": "0x4D50",
+  "manufacturer": "Martin Professional A/S",
+  "source": "MAC Aura, firmware 1.8.0 — fixture lists these and NACKs PARAMETER_DESCRIPTION",
+  "pids": [],
+  "wanted": ["0x8001", "0x8002", "0x8007"]
+}
+```
+
+That is a complete, mergeable contribution with not a single name in it. It
+tells whoever next has that manual open exactly what to look up, which is
+more than anyone knew before you sent it. RDMBench's `export-pids` fills
+`wanted` in for you.

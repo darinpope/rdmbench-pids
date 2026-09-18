@@ -49,6 +49,9 @@ that lists a PID and won't describe it.
   data and does not belong here.
 - `metadata_version` / `metadata_json` (optional) — a fixture's E1.37-5 §5
   Parameter Metadata Language description of the PID, verbatim.
+- `wanted` (optional) — `["0x8F02", …]`, PIDs this brand's fixtures **list
+  and refuse to describe**, that no table names either. The library's own
+  to-do list, per brand. See [What `wanted` is for](#what-wanted-is-for).
 - `pid` and `manufacturer_id` accept `"0x8F02"`, `"8F02"` or a number.
 - A PID outside `0x8000`–`0xFFDF` is rejected: these tables never override the
   standard ones, which E1.20 and E1.37-x define.
@@ -66,6 +69,25 @@ What actually gates a merge here is stricter than the schema: CI runs
 RDMBench's own loader over every table, so the check and the bench agree by
 construction, and adds the rules a published library needs — a stated source,
 no development fixtures, nothing hidden in a subdirectory.
+
+## What `wanted` is for
+
+A fixture that describes its private PIDs is the easy case. The common one
+is a fixture that lists ten PIDs in `SUPPORTED_PARAMETERS` and refuses to
+describe any of them — those rows show as raw hex in a report, and only a
+manual will ever name them.
+
+That refusal is information, and it used to be thrown away. `wanted`
+records it: which PIDs a brand's fixtures have, that nobody has named yet.
+It is the difference between "we have nothing for this brand" and "we know
+exactly which eleven parameters to look up when someone finds the manual."
+
+A bench ignores `wanted` entirely — it names nothing, so no report
+changes. It is here for whoever is doing the curating, and it rides on the
+table file so that a capture is one file and proposing it is one click.
+
+A file may hold nothing but `wanted`. That is a perfectly good
+contribution: the fixture told you which questions to ask.
 
 ## Sourcing rule
 
