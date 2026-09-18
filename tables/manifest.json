@@ -1,4 +1,7 @@
 {
-  "version": "20260918.1",
-  "files": {}
+  "version": "20260918.2",
+  "files": {
+    "martin-professional.json": "9289256250f20cbbdf2403828d5fce71334427c52cb26a065f70e4b8eb4713cf",
+    "vari-lite.json": "dded0540b22e98b4e8b183d38dbeea3e53a9bd4632ec883c84dc50d8bfa93a7a"
+  }
 }
