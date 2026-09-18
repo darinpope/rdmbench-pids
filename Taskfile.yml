@@ -27,10 +27,12 @@ tasks:
   validate:
     desc: |
       Check every table: it loads, it is sourced, it stays inside the
-      manufacturer-specific PID range, and it is where a bench would look.
+      manufacturer-specific PID range, and it is where a bench would look;
+      and every fixture profile parses, is sourced and profiles one model.
       This is what gates a pull request.
     cmds:
       - '{{.CLI}} validate-tables tables'
+      - '{{.CLI}} validate-profiles profiles'
 
   manifest:check:
     desc: |

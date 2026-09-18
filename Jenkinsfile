@@ -22,7 +22,7 @@
 // ADJUST: the agent label below to match your fleet.
 
 pipeline {
-    agent { label 'linux' }
+    agent { label 'darin-m2-studio' }
 
     options {
         timestamps()
@@ -40,8 +40,7 @@ pipeline {
         }
 
         stage('manifest') {
-            // CHANGE_ID is set only on a pull-request build.
-            when { expression { env.CHANGE_ID == null } }
+            when { not { changeRequest() } }
             steps { sh 'task manifest:check' }
         }
     }

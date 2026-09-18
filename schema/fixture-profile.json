@@ -1,0 +1,219 @@
+{
+  "$id": "https://rdmbench.dev/schema/fixture-profile.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "RDMBench fixture profile",
+  "description": "What a *model* is, captured from one unit of it: identity, product category and details, firmware, every DMX personality (name, footprint, E1.37-5 stable ID where the fixture has one), every sensor's definition, and the PIDs it lists — the file format under the library's `profiles/` directory and what `export-profile --out` writes. Harvested self-description: no values, no current state, no slot tables (reading those means switching the fixture's mode).",
+  "type": "object",
+  "properties": {
+    "manufacturer": {
+      "type": "string"
+    },
+    "manufacturer_id": {
+      "description": "ESTA manufacturer ID — the top 16 bits of the brand's UIDs.",
+      "$ref": "#/$defs/HexU16"
+    },
+    "model": {
+      "description": "DEVICE_MODEL_DESCRIPTION, when the fixture has one.",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "model_id": {
+      "description": "DEVICE_INFO's model ID. Manufacturer-assigned; unique within the\nbrand, and together with `manufacturer_id` the key of this file.",
+      "$ref": "#/$defs/HexU16"
+    },
+    "personalities": {
+      "description": "Every personality the fixture has, in number order. The current one\nis deliberately not recorded: that is the unit's state, not the\nmodel's.",
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/PersonalityProfile"
+      }
+    },
+    "product_category": {
+      "description": "Table A-5 name of the product category, with its code.",
+      "type": "string"
+    },
+    "product_category_id": {
+      "$ref": "#/$defs/HexU16"
+    },
+    "product_details": {
+      "description": "Table A-6 names from PRODUCT_DETAIL_ID_LIST; an unlisted code as\n`0xNNNN`.",
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "protocol_version": {
+      "description": "RDM protocol version as `major.minor` (`1.0` for E1.20-2010).",
+      "type": "string"
+    },
+    "sensors": {
+      "description": "Every sensor's definition, in number order — no values, for the\nsame reason.",
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/SensorProfile"
+      }
+    },
+    "software_version": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "software_version_id": {
+      "description": "The firmware this was read from. Personalities and sensors can\nchange between versions — a profile is only ever true of the\nfirmware that said it.",
+      "$ref": "#/$defs/HexU32"
+    },
+    "source": {
+      "description": "Where this came from: the unit, its firmware, the date. Required by\nthe sourcing rule, like a PID table's.",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "sub_device_count": {
+      "type": "integer",
+      "format": "uint16",
+      "maximum": 65535,
+      "minimum": 0
+    },
+    "supported_parameters": {
+      "description": "What the fixture listed in SUPPORTED_PARAMETERS (or its enhanced\nform), so a reader can tell whether a model has a PID without a\nunit in front of them.",
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/HexU16"
+      }
+    }
+  },
+  "required": [
+    "manufacturer_id",
+    "manufacturer",
+    "model_id",
+    "product_category",
+    "product_category_id",
+    "software_version_id",
+    "protocol_version",
+    "sub_device_count",
+    "personalities",
+    "sensors"
+  ],
+  "$defs": {
+    "HexU16": {
+      "description": "16-bit value as `0xABCD` (a bare `ABCD` or a plain number is accepted on read).",
+      "type": "string",
+      "pattern": "^(0[xX])?[0-9A-Fa-f]{1,4}$"
+    },
+    "HexU32": {
+      "description": "32-bit value as `0xABCD1234` (a bare `ABCD1234` or a plain number is accepted on read).",
+      "type": "string",
+      "pattern": "^(0[xX])?[0-9A-Fa-f]{1,8}$"
+    },
+    "PersonalityProfile": {
+      "description": "One DMX personality: name and footprint from DMX_PERSONALITY_DESCRIPTION,\nand the stable identifier from E1.37-5's DMX_PERSONALITY_ID where the\nfixture has it — the thing a desk profile can be matched against after\na firmware renumbers the list.",
+      "type": "object",
+      "properties": {
+        "footprint": {
+          "type": "integer",
+          "format": "uint16",
+          "maximum": 65535,
+          "minimum": 0
+        },
+        "name": {
+          "type": "string"
+        },
+        "number": {
+          "description": "1-based, as the fixture numbers them.",
+          "type": "integer",
+          "format": "uint8",
+          "maximum": 255,
+          "minimum": 0
+        },
+        "personality_id": {
+          "description": "`major.minor` in hex, or `user-defined` / `undefined`.",
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "number",
+        "name",
+        "footprint"
+      ]
+    },
+    "SensorProfile": {
+      "description": "One sensor's definition, scaled into its unit (a value in `unit`, not\nthe raw i16), so a reader compares it with a report directly.",
+      "type": "object",
+      "properties": {
+        "kind": {
+          "description": "Table A-12 sensor type name.",
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "normal": {
+          "type": "array",
+          "maxItems": 2,
+          "minItems": 2,
+          "prefixItems": [
+            {
+              "type": "number",
+              "format": "double"
+            },
+            {
+              "type": "number",
+              "format": "double"
+            }
+          ]
+        },
+        "number": {
+          "description": "0-based, as the fixture numbers them.",
+          "type": "integer",
+          "format": "uint8",
+          "maximum": 255,
+          "minimum": 0
+        },
+        "range": {
+          "description": "The limits the sensor can report, and the range it calls normal.",
+          "type": "array",
+          "maxItems": 2,
+          "minItems": 2,
+          "prefixItems": [
+            {
+              "type": "number",
+              "format": "double"
+            },
+            {
+              "type": "number",
+              "format": "double"
+            }
+          ]
+        },
+        "records_lowest_highest": {
+          "description": "Whether SENSOR_VALUE carries lowest / highest detected, and a\nRECORD_SENSORS value.",
+          "type": "boolean"
+        },
+        "records_value": {
+          "type": "boolean"
+        },
+        "unit": {
+          "description": "Prefix symbol plus Table A-13 unit symbol — `°C`, `mV`, `%`.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "number",
+        "name",
+        "kind",
+        "unit",
+        "range",
+        "normal",
+        "records_lowest_highest",
+        "records_value"
+      ]
+    }
+  }
+}
