@@ -40,8 +40,7 @@ pipeline {
         }
 
         stage('manifest') {
-            // CHANGE_ID is set only on a pull-request build.
-            when { expression { env.CHANGE_ID == null } }
+            when { not { changeRequest() } }
             steps { sh 'task manifest:check' }
         }
     }
