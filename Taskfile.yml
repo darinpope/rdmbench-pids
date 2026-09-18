@@ -1,0 +1,49 @@
+# Commands for this repo. CI shells out to these, so the same checks run by
+# hand as run on an agent — the arrangement RDMBench itself uses.
+#
+# Everything here needs `rdmbench-cli` on PATH. That is deliberate: the tool
+# that checks these tables is the same one that loads them on a bench, so
+# there is no second implementation of the format to drift out of step. If you
+# do not have it, open a pull request and CI will check for you.
+#
+# https://taskfile.dev
+
+version: '3'
+
+vars:
+  CLI: '{{.CLI | default "rdmbench-cli"}}'
+
+tasks:
+  default:
+    cmds:
+      - task: validate
+
+  versions:
+    desc: What the agent is running.
+    cmds:
+      - '{{.CLI}} --version'
+      - git --version
+
+  validate:
+    desc: |
+      Check every table: it loads, it is sourced, it stays inside the
+      manufacturer-specific PID range, and it is where a bench would look.
+      This is what gates a pull request.
+    cmds:
+      - '{{.CLI}} validate-tables tables'
+
+  manifest:check:
+    desc: |
+      Verify tables/manifest.json against the files. Run on main, not on a
+      pull request — contributors do not regenerate the manifest, a
+      maintainer does when merging.
+    cmds:
+      - '{{.CLI}} pid-manifest tables --check'
+
+  manifest:
+    desc: |
+      Regenerate tables/manifest.json. Maintainers only, at merge time: the
+      version moves only when a table changed, and a merge to main with a
+      moved version is what a release is.
+    cmds:
+      - '{{.CLI}} pid-manifest tables'

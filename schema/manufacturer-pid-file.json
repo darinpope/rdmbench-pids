@@ -1,0 +1,109 @@
+{
+  "$id": "https://rdmbench.dev/schema/manufacturer-pid-file.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "RDMBench manufacturer PID table",
+  "description": "One brand's manufacturer-specific PID names and types — the file format under `manufacturer-pids/` and what `export-pids --out` writes. Sourced from manuals, the fixture's own PARAMETER_DESCRIPTION, or sniffing; never from OLA's PID store.",
+  "type": "object",
+  "properties": {
+    "manufacturer": {
+      "type": "string"
+    },
+    "manufacturer_id": {
+      "description": "ESTA manufacturer ID — the top 16 bits of the brand's UIDs.",
+      "$ref": "#/$defs/HexU16"
+    },
+    "pids": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/PidEntry"
+      }
+    },
+    "source": {
+      "description": "Where these entries came from. Required by the sourcing rule, and\nthe first thing to check when an entry looks wrong on a bench.",
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "required": [
+    "manufacturer_id",
+    "manufacturer",
+    "pids"
+  ],
+  "$defs": {
+    "EnumValue": {
+      "description": "One named value of an enumerated manufacturer parameter, from\nENUM_LABEL (§10.4.3).",
+      "type": "object",
+      "properties": {
+        "label": {
+          "type": "string"
+        },
+        "value": {
+          "type": "integer",
+          "format": "uint32",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "value",
+        "label"
+      ]
+    },
+    "HexU16": {
+      "description": "16-bit value as `0xABCD` (a bare `ABCD` or a plain number is accepted on read).",
+      "type": "string",
+      "pattern": "^(0[xX])?[0-9A-Fa-f]{1,4}$"
+    },
+    "PidEntry": {
+      "type": "object",
+      "properties": {
+        "data_type": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "labels": {
+          "description": "Names for the values of an enumerated PID. Only ever what a fixture\nsaid through ENUM_LABEL (§10.4.3) — a captured file carries them\nso a unit that names its values once names them for every later\nbench that meets the same brand. Not a place for hand-written\ninterpretation; that is what the knowledge packs are for.",
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/EnumValue"
+          }
+        },
+        "metadata_json": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "metadata_version": {
+          "description": "The fixture's E1.37-5 §5 metadata description, verbatim, with its\nversion. Carried for the record and for the curator who merges a\ncapture — the snapshot only ever reads it from the fixture itself.",
+          "type": [
+            "integer",
+            "null"
+          ],
+          "format": "uint16",
+          "maximum": 65535,
+          "minimum": 0
+        },
+        "name": {
+          "type": "string"
+        },
+        "pid": {
+          "$ref": "#/$defs/HexU16"
+        },
+        "settable": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "pid",
+        "name"
+      ]
+    }
+  }
+}

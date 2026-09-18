@@ -1,0 +1,6 @@
+# The manifest's sha256 is taken over committed bytes, so a CRLF checkout
+# would produce hashes that disagree with every other clone — and with what
+# benches downloaded. Normalise, permanently.
+*.json text eol=lf
+*.md text eol=lf
+*.py text eol=lf
