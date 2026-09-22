@@ -36,7 +36,7 @@ tasks:
 
   manifest:check:
     desc: |
-      Verify tables/manifest.json against the files. Run on main, not on a
+      Verify tables/manifest.json against the tables and the profiles. Run on main, not on a
       pull request — contributors do not regenerate the manifest, a
       maintainer does when merging.
     cmds:
@@ -44,8 +44,9 @@ tasks:
 
   manifest:
     desc: |
-      Regenerate tables/manifest.json. Maintainers only, at merge time: the
-      version moves only when a table changed, and a merge to main with a
-      moved version is what a release is.
+      Regenerate tables/manifest.json, which covers profiles/ too (the
+      sibling of tables/). Maintainers only, at merge time: the version
+      moves only when a table or a profile changed, and a merge to main
+      with a moved version is what a release is.
     cmds:
       - '{{.CLI}} pid-manifest tables'

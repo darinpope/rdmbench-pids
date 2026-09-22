@@ -16,12 +16,13 @@ mode, or per-personality slot tables (reading those means switching the
 fixture's mode, so they are left out on purpose; the footprint is what a
 profile records about a mode).
 
-Nothing fetches this directory. Unlike `tables/`, which a bench downloads by
-manifest and must stay flat, `profiles/` is organised for people and any
-depth is fine. RDMBench reads it only when pointed at a checkout
-(`--profiles DIR`, or the app given the same folder), and only for a
-profile's `quirks` — for everything else the bench has the fixture in front
-of it. The feature the rest makes possible ("what does channel 9 do in the
+A bench fetches this directory with the tables. `tables/manifest.json` has
+a `profiles` map, the sha256 of every file here keyed by its path under
+`profiles/`. It is the same manifest with one version, so a changed profile
+is a release just as a changed table is. Unlike `tables/`, which must stay
+flat, `profiles/` is organised for people and any depth is fine. A bench
+reads a profile only for its `quirks` — for everything else the bench has
+the fixture in front of it. The feature the rest makes possible ("what does channel 9 do in the
 mode the desk is patched for?", answerable without the fixture) comes after.
 
 ## Capturing one
