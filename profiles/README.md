@@ -18,10 +18,11 @@ profile records about a mode).
 
 Nothing fetches this directory. Unlike `tables/`, which a bench downloads by
 manifest and must stay flat, `profiles/` is organised for people and any
-depth is fine. RDMBench does not consume profiles yet — the bench has the
-fixture in front of it. This is a contribution to the ecosystem first, and
-the feature it makes possible ("what does channel 9 do in the mode the desk
-is patched for?", answerable without the fixture) comes after.
+depth is fine. RDMBench reads it only when pointed at a checkout
+(`--profiles DIR`, or the app given the same folder), and only for a
+profile's `quirks` — for everything else the bench has the fixture in front
+of it. The feature the rest makes possible ("what does channel 9 do in the
+mode the desk is patched for?", answerable without the fixture) comes after.
 
 ## Capturing one
 
@@ -70,6 +71,11 @@ generated from RDMBench's types. In short:
 - Personalities and sensors change between firmware versions. A profile is
   true of the firmware in `source`; a newer capture of the same model
   replaces the file, with the version moving in `source`.
+- `quirks` is optional and never written by a capture: it records what a
+  model is known to get **wrong**, which the wire cannot show. Each entry
+  is a `kind` (today only `identify-inverted`) and a required `source`
+  giving the bench, the method and the date — an observation someone can
+  repeat, not an opinion. See [`adj/5px-12px.json`](adj/5px-12px.json).
 - One file per manufacturer + model ID. Two files for one model is a
   warning from the validator, since a reader cannot tell which to use.
 

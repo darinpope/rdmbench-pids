@@ -48,6 +48,13 @@
       "description": "RDM protocol version as `major.minor` (`1.0` for E1.20-2010).",
       "type": "string"
     },
+    "quirks": {
+      "description": "What this model is known to get **wrong** — see [`Quirk`]. Never\nwritten by [`capture_profile`]: the wire cannot show a fixture\nlying, so every entry is a curator's, added from a bench\nobservation with a method.",
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/Quirk"
+      }
+    },
     "sensors": {
       "description": "Every sensor's definition, in number order — no values, for the\nsame reason.",
       "type": "array",
@@ -141,6 +148,37 @@
         "number",
         "name",
         "footprint"
+      ]
+    },
+    "Quirk": {
+      "description": "One thing a model is known to get wrong, and how that was established.\n\nThis is the same subject as the rest of the profile — what a model is,\nkeyed on manufacturer and model ID — so it lives here rather than in a\nfourth dataset with its own loader and precedence rules. What a fixture\n*is* and what it *lies about* are both facts about the model, and both\nare only worth anything with a source attached.\n\nA quirk is never applied to a stored reading: see [`crate::quirks`].",
+      "type": "object",
+      "properties": {
+        "kind": {
+          "$ref": "#/$defs/QuirkKind"
+        },
+        "source": {
+          "description": "How it was established: the bench, the method, the date. Required —\nthe entry bar for a quirk is a documented observation, because a\nquirks table is otherwise where a project's own bugs go to hide.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "source"
+      ]
+    },
+    "QuirkKind": {
+      "description": "The quirks this build knows how to act on.\n\nDeliberately a short list. Each entry has to be something the bench can\n*do* something about — a reading it can annotate — not a note about the\nmodel, which is what a manual is for.",
+      "anyOf": [
+        {
+          "description": "IDENTIFY_DEVICE (§10.11.1) reads backwards: the unit shows itself\nwhen the flag is `0` and rests when it is `1`. Invisible on the\nwire — the flag it reports is the flag it was given — so only a\nhuman watching the fixture can find it, and nothing but an entry\nhere can tell the bench.",
+          "type": "string",
+          "const": "identify-inverted"
+        },
+        {
+          "description": "A kind written by a newer build than this one. Carried through\nunchanged so a round trip does not drop it, and acted on by\nnothing: a bench that cannot name a quirk must not guess at it.",
+          "type": "string"
+        }
       ]
     },
     "SensorProfile": {
