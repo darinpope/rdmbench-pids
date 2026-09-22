@@ -1,0 +1,69 @@
+{
+  "manufacturer_id": "0x1900",
+  "manufacturer": "ADJ",
+  "model_id": "0x0026",
+  "model": "5PX/12PX",
+  "product_category": "Dimmer (LED)",
+  "product_category_id": "0x0509",
+  "software_version_id": "0x00000001",
+  "software_version": "V1.22",
+  "protocol_version": "1.0",
+  "sub_device_count": 0,
+  "personalities": [
+    {
+      "number": 1,
+      "name": "CH6",
+      "footprint": 6
+    },
+    {
+      "number": 2,
+      "name": "CH7",
+      "footprint": 7
+    },
+    {
+      "number": 3,
+      "name": "CH8",
+      "footprint": 8
+    },
+    {
+      "number": 4,
+      "name": "CH12",
+      "footprint": 12
+    }
+  ],
+  "sensors": [
+    {
+      "number": 0,
+      "name": "Temperature",
+      "kind": "temperature",
+      "unit": "°C",
+      "range": [
+        0.0,
+        160.0
+      ],
+      "normal": [
+        0.0,
+        60.0
+      ],
+      "records_lowest_highest": false,
+      "records_value": false
+    }
+  ],
+  "supported_parameters": [
+    "0x0200",
+    "0x0201",
+    "0x0080",
+    "0x0081",
+    "0x0082",
+    "0x00E0",
+    "0x00E1",
+    "0x0400"
+  ],
+  "source": "Captured by RDMBench 0.1.0 from the fixture's own DEVICE_INFO / DMX_PERSONALITY_DESCRIPTION / SENSOR_DEFINITION: 5PX/12PX, software V1.22, unit 1900:88B261B3, 2026-09-22",
+  "quirks": [
+    {
+      "kind": "identify-inverted",
+      "source": "Observed on the RDMBench bench on 2026-09-21, unit 1900:88B261B3 on firmware V1.22. Method: DMX State set to bLC so that with no DMX on the line the resting state is unambiguously dark, then IDENTIFY_DEVICE toggled with nothing else on the line — 1 (identify on) leaves the unit fully dark, 0 (identify off) makes it blink. Both directions, repeated. The unit also powers up in the state it reports as identifying. Write-up: docs/bench.md in the rdmbench repo."
+    }
+  ]
+}
