@@ -34,7 +34,7 @@
           {
             "channel": 9,
             "value": 0,
-            "note": "Colour Macro: 253-255 is Color64, UV only, and a macro overrides channels 1-5"
+            "note": "Colour Macro: 253-255 is Color64, UV only; the chart gives every macro all six emitters, UV included, so a macro overrides channels 1-5 and likely 6"
           },
           {
             "channel": 10,
