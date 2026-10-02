@@ -13,17 +13,182 @@
     {
       "number": 1,
       "name": "CH6",
-      "footprint": 6
+      "footprint": 6,
+      "slots": {
+        "slots": [
+          {
+            "channel": 1,
+            "name": "Red",
+            "start": 0
+          },
+          {
+            "channel": 2,
+            "name": "Green",
+            "start": 0
+          },
+          {
+            "channel": 3,
+            "name": "Blue",
+            "start": 0
+          },
+          {
+            "channel": 4,
+            "name": "White",
+            "start": 0
+          },
+          {
+            "channel": 5,
+            "name": "Amber",
+            "start": 0
+          },
+          {
+            "channel": 6,
+            "name": "UV",
+            "start": 0
+          }
+        ],
+        "source": "ADJ 5PX Hex / 5PX Hex Pearl User Manual, p.11 (DMX Traits & Values: names, and the bands of channels 8, 10, 11 and 12) and pp.12-13 (Color Macro Chart: channel 9's bands, read from which emitters each macro uses). The 6, 7 and 8 channel modes are the first 6, 7 and 8 channels of the 12 channel one, as the manual's table lays them out.",
+        "starts_source": "The RDMBench bench's own choice, not the manual's, which gives ranges and no defaults. Every emitter at 0, the master dimmer at full, the strobe on LED On (255) and channels 9-12 at 0 (macro Off, programs No Function, speed 0, Standard dimmer mode — the levels the load plan holds them at): a unit that is ready and dark, lit by raising one colour. Confirmed on 2026-10-01, unit 1900:88B261B3 on firmware V1.22 in 12CH: red, master dimmer and strobe at 255 with nothing else sent lit it solid red (checked by eye). Write-up: docs/bench.md in the rdmbench repo, 'Send DMX… on the 5PX'."
+      }
     },
     {
       "number": 2,
       "name": "CH7",
-      "footprint": 7
+      "footprint": 7,
+      "slots": {
+        "slots": [
+          {
+            "channel": 1,
+            "name": "Red",
+            "start": 0
+          },
+          {
+            "channel": 2,
+            "name": "Green",
+            "start": 0
+          },
+          {
+            "channel": 3,
+            "name": "Blue",
+            "start": 0
+          },
+          {
+            "channel": 4,
+            "name": "White",
+            "start": 0
+          },
+          {
+            "channel": 5,
+            "name": "Amber",
+            "start": 0
+          },
+          {
+            "channel": 6,
+            "name": "UV",
+            "start": 0
+          },
+          {
+            "channel": 7,
+            "name": "Master Dimmer",
+            "start": 255
+          }
+        ],
+        "source": "ADJ 5PX Hex / 5PX Hex Pearl User Manual, p.11 (DMX Traits & Values: names, and the bands of channels 8, 10, 11 and 12) and pp.12-13 (Color Macro Chart: channel 9's bands, read from which emitters each macro uses). The 6, 7 and 8 channel modes are the first 6, 7 and 8 channels of the 12 channel one, as the manual's table lays them out.",
+        "starts_source": "The RDMBench bench's own choice, not the manual's, which gives ranges and no defaults. Every emitter at 0, the master dimmer at full, the strobe on LED On (255) and channels 9-12 at 0 (macro Off, programs No Function, speed 0, Standard dimmer mode — the levels the load plan holds them at): a unit that is ready and dark, lit by raising one colour. Confirmed on 2026-10-01, unit 1900:88B261B3 on firmware V1.22 in 12CH: red, master dimmer and strobe at 255 with nothing else sent lit it solid red (checked by eye). Write-up: docs/bench.md in the rdmbench repo, 'Send DMX… on the 5PX'."
+      }
     },
     {
       "number": 3,
       "name": "CH8",
-      "footprint": 8
+      "footprint": 8,
+      "slots": {
+        "slots": [
+          {
+            "channel": 1,
+            "name": "Red",
+            "start": 0
+          },
+          {
+            "channel": 2,
+            "name": "Green",
+            "start": 0
+          },
+          {
+            "channel": 3,
+            "name": "Blue",
+            "start": 0
+          },
+          {
+            "channel": 4,
+            "name": "White",
+            "start": 0
+          },
+          {
+            "channel": 5,
+            "name": "Amber",
+            "start": 0
+          },
+          {
+            "channel": 6,
+            "name": "UV",
+            "start": 0
+          },
+          {
+            "channel": 7,
+            "name": "Master Dimmer",
+            "start": 255
+          },
+          {
+            "channel": 8,
+            "name": "Strobe",
+            "ranges": [
+              {
+                "from": 0,
+                "to": 31,
+                "meaning": "LED Off"
+              },
+              {
+                "from": 32,
+                "to": 63,
+                "meaning": "LED On"
+              },
+              {
+                "from": 64,
+                "to": 95,
+                "meaning": "Strobe Slow - Fast"
+              },
+              {
+                "from": 96,
+                "to": 127,
+                "meaning": "LED On"
+              },
+              {
+                "from": 128,
+                "to": 159,
+                "meaning": "Strobe Pulse Slow - Fast"
+              },
+              {
+                "from": 160,
+                "to": 191,
+                "meaning": "LED On"
+              },
+              {
+                "from": 192,
+                "to": 223,
+                "meaning": "Random Strobe"
+              },
+              {
+                "from": 224,
+                "to": 255,
+                "meaning": "LED On"
+              }
+            ],
+            "start": 255
+          }
+        ],
+        "source": "ADJ 5PX Hex / 5PX Hex Pearl User Manual, p.11 (DMX Traits & Values: names, and the bands of channels 8, 10, 11 and 12) and pp.12-13 (Color Macro Chart: channel 9's bands, read from which emitters each macro uses). The 6, 7 and 8 channel modes are the first 6, 7 and 8 channels of the 12 channel one, as the manual's table lays them out.",
+        "starts_source": "The RDMBench bench's own choice, not the manual's, which gives ranges and no defaults. Every emitter at 0, the master dimmer at full, the strobe on LED On (255) and channels 9-12 at 0 (macro Off, programs No Function, speed 0, Standard dimmer mode — the levels the load plan holds them at): a unit that is ready and dark, lit by raising one colour. Confirmed on 2026-10-01, unit 1900:88B261B3 on firmware V1.22 in 12CH: red, master dimmer and strobe at 255 with nothing else sent lit it solid red (checked by eye). Write-up: docs/bench.md in the rdmbench repo, 'Send DMX… on the 5PX'."
+      }
     },
     {
       "number": 4,
@@ -48,6 +213,237 @@
           }
         ],
         "source": "ADJ 5PX Hex / 5PX Hex Pearl User Manual, p.11 (DMX Traits & Values, 12CH) and pp.12-13 (Color Macro Chart). Confirmed on the RDMBench bench on 2026-09-22, unit 1900:88B261B3 on firmware V1.22: every slot at 255 for 150 s lit the unit UV only (checked by eye) and moved its temperature 25 -> 26 C; the same hold with channels 9, 10 and 12 at 0 lit all six emitters and moved it 25 -> 29 C. Write-up: docs/bench.md in the rdmbench repo, 'The load tool meets the 5PX'."
+      },
+      "slots": {
+        "slots": [
+          {
+            "channel": 1,
+            "name": "Red",
+            "start": 0
+          },
+          {
+            "channel": 2,
+            "name": "Green",
+            "start": 0
+          },
+          {
+            "channel": 3,
+            "name": "Blue",
+            "start": 0
+          },
+          {
+            "channel": 4,
+            "name": "White",
+            "start": 0
+          },
+          {
+            "channel": 5,
+            "name": "Amber",
+            "start": 0
+          },
+          {
+            "channel": 6,
+            "name": "UV",
+            "start": 0
+          },
+          {
+            "channel": 7,
+            "name": "Master Dimmer",
+            "start": 255
+          },
+          {
+            "channel": 8,
+            "name": "Strobe",
+            "ranges": [
+              {
+                "from": 0,
+                "to": 31,
+                "meaning": "LED Off"
+              },
+              {
+                "from": 32,
+                "to": 63,
+                "meaning": "LED On"
+              },
+              {
+                "from": 64,
+                "to": 95,
+                "meaning": "Strobe Slow - Fast"
+              },
+              {
+                "from": 96,
+                "to": 127,
+                "meaning": "LED On"
+              },
+              {
+                "from": 128,
+                "to": 159,
+                "meaning": "Strobe Pulse Slow - Fast"
+              },
+              {
+                "from": 160,
+                "to": 191,
+                "meaning": "LED On"
+              },
+              {
+                "from": 192,
+                "to": 223,
+                "meaning": "Random Strobe"
+              },
+              {
+                "from": 224,
+                "to": 255,
+                "meaning": "LED On"
+              }
+            ],
+            "start": 255
+          },
+          {
+            "channel": 9,
+            "name": "Color Macro",
+            "ranges": [
+              {
+                "from": 0,
+                "to": 0,
+                "meaning": "Off"
+              },
+              {
+                "from": 1,
+                "to": 232,
+                "meaning": "Color1-Color58, mixes of red, green, blue and white (chart pp.12-13)"
+              },
+              {
+                "from": 233,
+                "to": 236,
+                "meaning": "Color59, red only"
+              },
+              {
+                "from": 237,
+                "to": 240,
+                "meaning": "Color60, green only"
+              },
+              {
+                "from": 241,
+                "to": 244,
+                "meaning": "Color61, blue only"
+              },
+              {
+                "from": 245,
+                "to": 248,
+                "meaning": "Color62, white only"
+              },
+              {
+                "from": 249,
+                "to": 252,
+                "meaning": "Color63, amber only"
+              },
+              {
+                "from": 253,
+                "to": 255,
+                "meaning": "Color64, UV only"
+              }
+            ],
+            "start": 0
+          },
+          {
+            "channel": 10,
+            "name": "Programs",
+            "ranges": [
+              {
+                "from": 0,
+                "to": 20,
+                "meaning": "No Function"
+              },
+              {
+                "from": 21,
+                "to": 40,
+                "meaning": "30 Color Change"
+              },
+              {
+                "from": 41,
+                "to": 60,
+                "meaning": "6 Color Change"
+              },
+              {
+                "from": 61,
+                "to": 80,
+                "meaning": "Color Fade"
+              },
+              {
+                "from": 81,
+                "to": 100,
+                "meaning": "Sound Active 30 Color Change"
+              },
+              {
+                "from": 101,
+                "to": 120,
+                "meaning": "Sound Active 6 Color Change"
+              },
+              {
+                "from": 121,
+                "to": 140,
+                "meaning": "Sound Active 6 Color Fade"
+              },
+              {
+                "from": 141,
+                "to": 255,
+                "meaning": "No Function"
+              }
+            ],
+            "start": 0
+          },
+          {
+            "channel": 11,
+            "name": "Program Speed/Sound Sensitivity",
+            "ranges": [
+              {
+                "from": 0,
+                "to": 255,
+                "meaning": "Slow - Fast; Least Sensitive - Most Sensitive"
+              }
+            ],
+            "start": 0
+          },
+          {
+            "channel": 12,
+            "name": "Dimmer Modes",
+            "ranges": [
+              {
+                "from": 0,
+                "to": 20,
+                "meaning": "Standard"
+              },
+              {
+                "from": 21,
+                "to": 40,
+                "meaning": "Stage"
+              },
+              {
+                "from": 41,
+                "to": 60,
+                "meaning": "TV"
+              },
+              {
+                "from": 61,
+                "to": 80,
+                "meaning": "Architectural"
+              },
+              {
+                "from": 81,
+                "to": 100,
+                "meaning": "Theatre"
+              },
+              {
+                "from": 101,
+                "to": 255,
+                "meaning": "Default to unit setting"
+              }
+            ],
+            "start": 0
+          }
+        ],
+        "source": "ADJ 5PX Hex / 5PX Hex Pearl User Manual, p.11 (DMX Traits & Values: names, and the bands of channels 8, 10, 11 and 12) and pp.12-13 (Color Macro Chart: channel 9's bands, read from which emitters each macro uses). The 6, 7 and 8 channel modes are the first 6, 7 and 8 channels of the 12 channel one, as the manual's table lays them out.",
+        "starts_source": "The RDMBench bench's own choice, not the manual's, which gives ranges and no defaults. Every emitter at 0, the master dimmer at full, the strobe on LED On (255) and channels 9-12 at 0 (macro Off, programs No Function, speed 0, Standard dimmer mode — the levels the load plan holds them at): a unit that is ready and dark, lit by raising one colour. Confirmed on 2026-10-01, unit 1900:88B261B3 on firmware V1.22 in 12CH: red, master dimmer and strobe at 255 with nothing else sent lit it solid red (checked by eye). Write-up: docs/bench.md in the rdmbench repo, 'Send DMX… on the 5PX'."
       }
     }
   ],
