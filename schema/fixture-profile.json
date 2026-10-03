@@ -106,6 +106,29 @@
     "sensors"
   ],
   "$defs": {
+    "HeldLevel": {
+      "description": "A level held on another channel of the same personality.",
+      "type": "object",
+      "properties": {
+        "channel": {
+          "description": "1 for the personality's first slot.",
+          "type": "integer",
+          "format": "uint16",
+          "maximum": 65535,
+          "minimum": 0
+        },
+        "value": {
+          "type": "integer",
+          "format": "uint8",
+          "maximum": 255,
+          "minimum": 0
+        }
+      },
+      "required": [
+        "channel",
+        "value"
+      ]
+    },
     "HexU16": {
       "description": "16-bit value as `0xABCD` (a bare `ABCD` or a plain number is accepted on read).",
       "type": "string",
@@ -254,6 +277,13 @@
           "format": "uint8",
           "maximum": 255,
           "minimum": 0
+        },
+        "with": {
+          "description": "What else to hold while this channel is walked, for a channel that\nonly changes light another one makes — a master dimmer, a strobe, a\ndimmer curve. On its own, with every emitter at rest, it shows\nnothing, and a tech fails a healthy channel (the 5PX's first walk,\n`docs/bench.md`). Not a walk plan: one list of levels, nothing else.",
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/HeldLevel"
+          }
         }
       },
       "required": [
@@ -381,6 +411,13 @@
         },
         "starts_source": {
           "description": "Who chose the `start` levels, and why. Required as soon as one slot\nhas a `start`, because a manual gives ranges, not defaults: a\nstarting level is the curator's choice, and the file has to say so\nrather than pass it off as the manufacturer's.",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "with_source": {
+          "description": "Who chose the levels in each slot's `with`, and why. Required as\nsoon as one slot has a `with`, for the reason `starts_source` is:\nthe manual says what a channel does, not what to light it with.",
           "type": [
             "string",
             "null"

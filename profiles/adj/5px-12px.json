@@ -90,11 +90,18 @@
           {
             "channel": 7,
             "name": "Master Dimmer",
-            "start": 255
+            "start": 255,
+            "with": [
+              {
+                "channel": 4,
+                "value": 255
+              }
+            ]
           }
         ],
         "source": "ADJ 5PX Hex / 5PX Hex Pearl User Manual, p.11 (DMX Traits & Values: names, and the bands of channels 8, 10, 11 and 12) and pp.12-13 (Color Macro Chart: channel 9's bands, read from which emitters each macro uses). The 6, 7 and 8 channel modes are the first 6, 7 and 8 channels of the 12 channel one, as the manual's table lays them out.",
-        "starts_source": "The RDMBench bench's own choice, not the manual's, which gives ranges and no defaults. Every emitter at 0, the master dimmer at full, the strobe on LED On (255) and channels 9-12 at 0 (macro Off, programs No Function, speed 0, Standard dimmer mode — the levels the load plan holds them at): a unit that is ready and dark, lit by raising one colour. Confirmed on 2026-10-01, unit 1900:88B261B3 on firmware V1.22 in 12CH: red, master dimmer and strobe at 255 with nothing else sent lit it solid red (checked by eye). Write-up: docs/bench.md in the rdmbench repo, 'Send DMX… on the 5PX'."
+        "starts_source": "The RDMBench bench's own choice, not the manual's, which gives ranges and no defaults. Every emitter at 0, the master dimmer at full, the strobe on LED On (255) and channels 9-12 at 0 (macro Off, programs No Function, speed 0, Standard dimmer mode — the levels the load plan holds them at): a unit that is ready and dark, lit by raising one colour. Confirmed on 2026-10-01, unit 1900:88B261B3 on firmware V1.22 in 12CH: red, master dimmer and strobe at 255 with nothing else sent lit it solid red (checked by eye). Write-up: docs/bench.md in the rdmbench repo, 'Send DMX… on the 5PX'.",
+        "with_source": "The RDMBench bench's own choice, not the manual's. With every emitter at its start (0), the master dimmer, the strobe and the dimmer mode change light no other channel is making, so a channel walk showed nothing on any of them and a tech failed three healthy channels (2026-10-03, unit 1900:88B261B3 on firmware V1.22 in 12CH; docs/bench.md in the rdmbench repo, 'The channel walk on the 5PX'). So each is walked with white up: at full for the master dimmer and the strobe, and at 64 for the dimmer mode, since a dimming curve shows only partway down — at full every mode looks the same. White, because it is the brightest single emitter and the easiest light to judge a dim or a strobe against."
       }
     },
     {
@@ -136,7 +143,13 @@
           {
             "channel": 7,
             "name": "Master Dimmer",
-            "start": 255
+            "start": 255,
+            "with": [
+              {
+                "channel": 4,
+                "value": 255
+              }
+            ]
           },
           {
             "channel": 8,
@@ -183,11 +196,18 @@
                 "meaning": "LED On"
               }
             ],
-            "start": 255
+            "start": 255,
+            "with": [
+              {
+                "channel": 4,
+                "value": 255
+              }
+            ]
           }
         ],
         "source": "ADJ 5PX Hex / 5PX Hex Pearl User Manual, p.11 (DMX Traits & Values: names, and the bands of channels 8, 10, 11 and 12) and pp.12-13 (Color Macro Chart: channel 9's bands, read from which emitters each macro uses). The 6, 7 and 8 channel modes are the first 6, 7 and 8 channels of the 12 channel one, as the manual's table lays them out.",
-        "starts_source": "The RDMBench bench's own choice, not the manual's, which gives ranges and no defaults. Every emitter at 0, the master dimmer at full, the strobe on LED On (255) and channels 9-12 at 0 (macro Off, programs No Function, speed 0, Standard dimmer mode — the levels the load plan holds them at): a unit that is ready and dark, lit by raising one colour. Confirmed on 2026-10-01, unit 1900:88B261B3 on firmware V1.22 in 12CH: red, master dimmer and strobe at 255 with nothing else sent lit it solid red (checked by eye). Write-up: docs/bench.md in the rdmbench repo, 'Send DMX… on the 5PX'."
+        "starts_source": "The RDMBench bench's own choice, not the manual's, which gives ranges and no defaults. Every emitter at 0, the master dimmer at full, the strobe on LED On (255) and channels 9-12 at 0 (macro Off, programs No Function, speed 0, Standard dimmer mode — the levels the load plan holds them at): a unit that is ready and dark, lit by raising one colour. Confirmed on 2026-10-01, unit 1900:88B261B3 on firmware V1.22 in 12CH: red, master dimmer and strobe at 255 with nothing else sent lit it solid red (checked by eye). Write-up: docs/bench.md in the rdmbench repo, 'Send DMX… on the 5PX'.",
+        "with_source": "The RDMBench bench's own choice, not the manual's. With every emitter at its start (0), the master dimmer, the strobe and the dimmer mode change light no other channel is making, so a channel walk showed nothing on any of them and a tech failed three healthy channels (2026-10-03, unit 1900:88B261B3 on firmware V1.22 in 12CH; docs/bench.md in the rdmbench repo, 'The channel walk on the 5PX'). So each is walked with white up: at full for the master dimmer and the strobe, and at 64 for the dimmer mode, since a dimming curve shows only partway down — at full every mode looks the same. White, because it is the brightest single emitter and the easiest light to judge a dim or a strobe against."
       }
     },
     {
@@ -249,7 +269,13 @@
           {
             "channel": 7,
             "name": "Master Dimmer",
-            "start": 255
+            "start": 255,
+            "with": [
+              {
+                "channel": 4,
+                "value": 255
+              }
+            ]
           },
           {
             "channel": 8,
@@ -296,7 +322,13 @@
                 "meaning": "LED On"
               }
             ],
-            "start": 255
+            "start": 255,
+            "with": [
+              {
+                "channel": 4,
+                "value": 255
+              }
+            ]
           },
           {
             "channel": 9,
@@ -439,11 +471,18 @@
                 "meaning": "Default to unit setting"
               }
             ],
-            "start": 0
+            "start": 0,
+            "with": [
+              {
+                "channel": 4,
+                "value": 64
+              }
+            ]
           }
         ],
         "source": "ADJ 5PX Hex / 5PX Hex Pearl User Manual, p.11 (DMX Traits & Values: names, and the bands of channels 8, 10, 11 and 12) and pp.12-13 (Color Macro Chart: channel 9's bands, read from which emitters each macro uses). The 6, 7 and 8 channel modes are the first 6, 7 and 8 channels of the 12 channel one, as the manual's table lays them out.",
-        "starts_source": "The RDMBench bench's own choice, not the manual's, which gives ranges and no defaults. Every emitter at 0, the master dimmer at full, the strobe on LED On (255) and channels 9-12 at 0 (macro Off, programs No Function, speed 0, Standard dimmer mode — the levels the load plan holds them at): a unit that is ready and dark, lit by raising one colour. Confirmed on 2026-10-01, unit 1900:88B261B3 on firmware V1.22 in 12CH: red, master dimmer and strobe at 255 with nothing else sent lit it solid red (checked by eye). Write-up: docs/bench.md in the rdmbench repo, 'Send DMX… on the 5PX'."
+        "starts_source": "The RDMBench bench's own choice, not the manual's, which gives ranges and no defaults. Every emitter at 0, the master dimmer at full, the strobe on LED On (255) and channels 9-12 at 0 (macro Off, programs No Function, speed 0, Standard dimmer mode — the levels the load plan holds them at): a unit that is ready and dark, lit by raising one colour. Confirmed on 2026-10-01, unit 1900:88B261B3 on firmware V1.22 in 12CH: red, master dimmer and strobe at 255 with nothing else sent lit it solid red (checked by eye). Write-up: docs/bench.md in the rdmbench repo, 'Send DMX… on the 5PX'.",
+        "with_source": "The RDMBench bench's own choice, not the manual's. With every emitter at its start (0), the master dimmer, the strobe and the dimmer mode change light no other channel is making, so a channel walk showed nothing on any of them and a tech failed three healthy channels (2026-10-03, unit 1900:88B261B3 on firmware V1.22 in 12CH; docs/bench.md in the rdmbench repo, 'The channel walk on the 5PX'). So each is walked with white up: at full for the master dimmer and the strobe, and at 64 for the dimmer mode, since a dimming curve shows only partway down — at full every mode looks the same. White, because it is the brightest single emitter and the easiest light to judge a dim or a strobe against."
       }
     }
   ],

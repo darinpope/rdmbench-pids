@@ -96,8 +96,13 @@ generated from RDMBench's types. In short:
   optional `start`, the level RDMBench's **Send DMX…** rests it at. The
   layout's `source` names the manual page. **A manual gives ranges, not
   defaults**, so as soon as one slot has a `start` the layout needs a
-  `starts_source` saying who chose the levels and why. A fixture's own
-  slot table always wins over this one. See
+  `starts_source` saying who chose the levels and why. A slot can also
+  carry a `with` — levels on other channels (`channel`, `value`) that
+  RDMBench's channel walk holds while it shows this one, for a channel
+  that only changes light another one makes (a master dimmer, a strobe, a
+  dimmer curve), which on its own shows nothing. Those levels are the
+  curator's choice too, so any `with` needs a `with_source`. A fixture's
+  own slot table always wins over this one. See
   [`adj/5px-12px.json`](adj/5px-12px.json).
 - One file per manufacturer + model ID. Two files for one model is a
   warning from the validator, since a reader cannot tell which to use.
@@ -108,4 +113,6 @@ registration (no prototyping-block IDs), and no personality or sensor is
 defined twice, and every `load` plan is sourced, not empty, and names only
 channels inside its personality's footprint, each once. A `slots` layout
 answers to the same, plus: every slot named, its `ranges` in order and not
-overlapping, and a `starts_source` whenever a slot has a `start`.
+overlapping, a `starts_source` whenever a slot has a `start`, a
+`with_source` whenever a slot has a `with`, and every `with` naming
+another channel inside the footprint.
