@@ -106,6 +106,29 @@
     "sensors"
   ],
   "$defs": {
+    "HeldLevel": {
+      "description": "A level held on another channel of the same personality.",
+      "type": "object",
+      "properties": {
+        "channel": {
+          "description": "1 for the personality's first slot.",
+          "type": "integer",
+          "format": "uint16",
+          "maximum": 65535,
+          "minimum": 0
+        },
+        "value": {
+          "type": "integer",
+          "format": "uint8",
+          "maximum": 255,
+          "minimum": 0
+        }
+      },
+      "required": [
+        "channel",
+        "value"
+      ]
+    },
     "HexU16": {
       "description": "16-bit value as `0xABCD` (a bare `ABCD` or a plain number is accepted on read).",
       "type": "string",
@@ -204,12 +227,68 @@
             "string",
             "null"
           ]
+        },
+        "slots": {
+          "description": "What each channel of this personality is, for a fixture that does\nnot say so itself — see [`SlotLayout`]. Never written by\n[`capture_profile`]; every layout is a curator's, from the manual.",
+          "anyOf": [
+            {
+              "$ref": "#/$defs/SlotLayout"
+            },
+            {
+              "type": "null"
+            }
+          ]
         }
       },
       "required": [
         "number",
         "name",
         "footprint"
+      ]
+    },
+    "ProfileSlot": {
+      "description": "One channel of a [`SlotLayout`].",
+      "type": "object",
+      "properties": {
+        "channel": {
+          "description": "1 for the personality's first slot.",
+          "type": "integer",
+          "format": "uint16",
+          "maximum": 65535,
+          "minimum": 0
+        },
+        "name": {
+          "description": "The manual's name for it — \"Master Dimmer\". Shown verbatim, never\ntranslated.",
+          "type": "string"
+        },
+        "ranges": {
+          "description": "What each band of values does, where the manual splits the channel\n— \"0–31 LED Off\". Empty for a plain 0–100 % channel.",
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/SlotRange"
+          }
+        },
+        "start": {
+          "description": "The level to rest it at, as DEFAULT_SLOT_VALUE would give. Absent\nmeans not sent until set, as for a fixture that reports no default.",
+          "type": [
+            "integer",
+            "null"
+          ],
+          "format": "uint8",
+          "maximum": 255,
+          "minimum": 0
+        },
+        "with": {
+          "description": "What else to hold while this channel is walked, for a channel that\nonly changes light another one makes — a master dimmer, a strobe, a\ndimmer curve. On its own, with every emitter at rest, it shows\nnothing, and a tech fails a healthy channel (the 5PX's first walk,\n`docs/bench.md`). Not a walk plan: one list of levels, nothing else.",
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/HeldLevel"
+          }
+        }
+      },
+      "required": [
+        "channel",
+        "name"
       ]
     },
     "Quirk": {
@@ -300,7 +379,7 @@
           "type": "boolean"
         },
         "unit": {
-          "description": "Prefix symbol plus Table A-13 unit symbol — `°C`, `mV`, `%`.",
+          "description": "Table A-13 unit symbol — `°C`, `V`, `%`. The range and normal\nlimits are scaled by the prefix, so it is not repeated here.",
           "type": "string"
         }
       },
@@ -313,6 +392,68 @@
         "normal",
         "records_lowest_highest",
         "records_value"
+      ]
+    },
+    "SlotLayout": {
+      "description": "One personality's channels written down from the manual: in effect\nSLOT_INFO, SLOT_DESCRIPTION and DEFAULT_SLOT_VALUE for a fixture that\nimplements none of them.\n\nThe case that filed it: the ADJ 5PX HEX reports no slot table, and\n\"Send DMX…\" could only light it by a tech typing channel numbers out of\nthe manual — one channel is dark (master dimmer at 0) and one level is\nUV only (colour macro at full), `docs/bench.md`. Not the [`LoadPlan`]:\nthat answers what to drive in order to *measure*, this what each\nchannel *is* and where to rest it.",
+      "type": "object",
+      "properties": {
+        "slots": {
+          "description": "Every channel the manual names, in channel order.",
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ProfileSlot"
+          }
+        },
+        "source": {
+          "description": "Where the names and ranges came from: the manual and its page.\nRequired, as a load plan's is.",
+          "type": "string"
+        },
+        "starts_source": {
+          "description": "Who chose the `start` levels, and why. Required as soon as one slot\nhas a `start`, because a manual gives ranges, not defaults: a\nstarting level is the curator's choice, and the file has to say so\nrather than pass it off as the manufacturer's.",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "with_source": {
+          "description": "Who chose the levels in each slot's `with`, and why. Required as\nsoon as one slot has a `with`, for the reason `starts_source` is:\nthe manual says what a channel does, not what to light it with.",
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "slots",
+        "source"
+      ]
+    },
+    "SlotRange": {
+      "description": "A band of a [`ProfileSlot`]'s values and what it does.",
+      "type": "object",
+      "properties": {
+        "from": {
+          "type": "integer",
+          "format": "uint8",
+          "maximum": 255,
+          "minimum": 0
+        },
+        "meaning": {
+          "description": "The manual's words — \"LED Off\", \"Color64 (UV only)\". Verbatim.",
+          "type": "string"
+        },
+        "to": {
+          "type": "integer",
+          "format": "uint8",
+          "maximum": 255,
+          "minimum": 0
+        }
+      },
+      "required": [
+        "from",
+        "to",
+        "meaning"
       ]
     }
   }

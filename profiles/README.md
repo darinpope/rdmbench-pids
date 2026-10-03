@@ -21,8 +21,9 @@ a `profiles` map, the sha256 of every file here keyed by its path under
 `profiles/`. It is the same manifest with one version, so a changed profile
 is a release just as a changed table is. Unlike `tables/`, which must stay
 flat, `profiles/` is organised for people and any depth is fine. A bench
-reads a profile only for its `quirks` and its personalities' `load` plans —
-for everything else the bench has the fixture in front of it. The feature the rest makes possible ("what does channel 9 do in the
+reads a profile only for its `quirks` and its personalities' `load` plans
+and `slots` layouts — for everything else the bench has the fixture in front
+of it. The feature the rest makes possible ("what does channel 9 do in the
 mode the desk is patched for?", answerable without the fixture) comes after.
 
 ## Capturing one
@@ -87,6 +88,22 @@ generated from RDMBench's types. In short:
   required and should name the manual page and the bench run that
   confirmed it. RDMBench's `load` applies it without being asked, so an
   assistant driving the fixture gets it right with no manual.
+- A personality's `slots` is optional and never written by a capture: what
+  each channel is, for a fixture that reports no slot table of its own —
+  in effect SLOT_INFO, SLOT_DESCRIPTION and DEFAULT_SLOT_VALUE written
+  down from the manual. Each slot is a `channel`, the manual's `name`,
+  optional `ranges` (`from`, `to`, `meaning` — "0–31 LED Off") and an
+  optional `start`, the level RDMBench's **Send DMX…** rests it at. The
+  layout's `source` names the manual page. **A manual gives ranges, not
+  defaults**, so as soon as one slot has a `start` the layout needs a
+  `starts_source` saying who chose the levels and why. A slot can also
+  carry a `with` — levels on other channels (`channel`, `value`) that
+  RDMBench's channel walk holds while it shows this one, for a channel
+  that only changes light another one makes (a master dimmer, a strobe, a
+  dimmer curve), which on its own shows nothing. Those levels are the
+  curator's choice too, so any `with` needs a `with_source`. A fixture's
+  own slot table always wins over this one. See
+  [`adj/5px-12px.json`](adj/5px-12px.json).
 - One file per manufacturer + model ID. Two files for one model is a
   warning from the validator, since a reader cannot tell which to use.
 
@@ -94,4 +111,8 @@ CI runs `rdmbench-cli validate-profiles profiles` on every pull request:
 each file parses as a profile, names a source, comes from a real ESTA
 registration (no prototyping-block IDs), and no personality or sensor is
 defined twice, and every `load` plan is sourced, not empty, and names only
-channels inside its personality's footprint, each once.
+channels inside its personality's footprint, each once. A `slots` layout
+answers to the same, plus: every slot named, its `ranges` in order and not
+overlapping, a `starts_source` whenever a slot has a `start`, a
+`with_source` whenever a slot has a `with`, and every `with` naming
+another channel inside the footprint.
