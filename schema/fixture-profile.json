@@ -116,6 +116,57 @@
       "type": "string",
       "pattern": "^(0[xX])?[0-9A-Fa-f]{1,8}$"
     },
+    "LoadPlan": {
+      "description": "The channels of one personality that a load test must hold at a level\nof their own rather than at full.\n\nThe case that filed it: an ADJ 5PX HEX in its 12-channel personality\nwith every slot at 255 lights **UV only**, because channel 9 is a\ncolour macro whose top value overrides the emitters (`docs/bench.md`,\n\"The load tool meets the 5PX\"). A tech reads that out of the manual;\nan assistant asked to drive the fixture has no manual, so the profile\ncarries it. A fact about the model rather than a fault in it, which is\nwhy it is not a [`Quirk`] — and a fact about one personality, since\nthe same channel number means something else in another.",
+      "type": "object",
+      "properties": {
+        "slots": {
+          "description": "Each channel, counted from the fixture's start address, and the\nlevel it is held at while the rest of the footprint is at full.",
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/LoadSlot"
+          }
+        },
+        "source": {
+          "description": "Where this came from: the manual and page, and the bench run that\nconfirmed it. Required, as a quirk's is: a plan that is wrong\ndrives a fixture into the state the plan exists to avoid.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "slots",
+        "source"
+      ]
+    },
+    "LoadSlot": {
+      "description": "One channel of a [`LoadPlan`].",
+      "type": "object",
+      "properties": {
+        "channel": {
+          "description": "1 for the personality's first slot.",
+          "type": "integer",
+          "format": "uint16",
+          "maximum": 65535,
+          "minimum": 0
+        },
+        "note": {
+          "description": "What the channel is and why it is not at full — \"Colour macro:\n253–255 is UV only\". The curator's text, shown verbatim and never\ntranslated.",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "value": {
+          "type": "integer",
+          "format": "uint8",
+          "maximum": 255,
+          "minimum": 0
+        }
+      },
+      "required": [
+        "channel",
+        "value"
+      ]
+    },
     "PersonalityProfile": {
       "description": "One DMX personality: name and footprint from DMX_PERSONALITY_DESCRIPTION,\nand the stable identifier from E1.37-5's DMX_PERSONALITY_ID where the\nfixture has it — the thing a desk profile can be matched against after\na firmware renumbers the list.",
       "type": "object",
@@ -125,6 +176,17 @@
           "format": "uint16",
           "maximum": 65535,
           "minimum": 0
+        },
+        "load": {
+          "description": "How to drive this personality for a load test, where full on every\nslot is not output — see [`LoadPlan`]. Never written by\n[`capture_profile`]: nothing on the wire says which slot is a\ncolour macro, so every plan is a curator's, from the manual.",
+          "anyOf": [
+            {
+              "$ref": "#/$defs/LoadPlan"
+            },
+            {
+              "type": "null"
+            }
+          ]
         },
         "name": {
           "type": "string"

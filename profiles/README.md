@@ -21,8 +21,8 @@ a `profiles` map, the sha256 of every file here keyed by its path under
 `profiles/`. It is the same manifest with one version, so a changed profile
 is a release just as a changed table is. Unlike `tables/`, which must stay
 flat, `profiles/` is organised for people and any depth is fine. A bench
-reads a profile only for its `quirks` — for everything else the bench has
-the fixture in front of it. The feature the rest makes possible ("what does channel 9 do in the
+reads a profile only for its `quirks` and its personalities' `load` plans —
+for everything else the bench has the fixture in front of it. The feature the rest makes possible ("what does channel 9 do in the
 mode the desk is patched for?", answerable without the fixture) comes after.
 
 ## Capturing one
@@ -77,10 +77,21 @@ generated from RDMBench's types. In short:
   is a `kind` (today only `identify-inverted`) and a required `source`
   giving the bench, the method and the date — an observation someone can
   repeat, not an opinion. See [`adj/5px-12px.json`](adj/5px-12px.json).
+- A personality's `load` is optional and never written by a capture: the
+  channels a load test must hold at a level of their own because full on
+  them is not output — a colour macro, a program, a dimmer mode. The ADJ
+  5PX in 12-channel mode with every slot at 255 lights **UV only**, since
+  its channel 9 at 255 is a macro that overrides the emitters. Each slot
+  is a `channel` (1 for the personality's first), a `value`, and an
+  optional `note` saying what the channel is; the plan's `source` is
+  required and should name the manual page and the bench run that
+  confirmed it. RDMBench's `load` applies it without being asked, so an
+  assistant driving the fixture gets it right with no manual.
 - One file per manufacturer + model ID. Two files for one model is a
   warning from the validator, since a reader cannot tell which to use.
 
 CI runs `rdmbench-cli validate-profiles profiles` on every pull request:
 each file parses as a profile, names a source, comes from a real ESTA
 registration (no prototyping-block IDs), and no personality or sensor is
-defined twice.
+defined twice, and every `load` plan is sourced, not empty, and names only
+channels inside its personality's footprint, each once.

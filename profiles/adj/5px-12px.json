@@ -28,7 +28,27 @@
     {
       "number": 4,
       "name": "CH12",
-      "footprint": 12
+      "footprint": 12,
+      "load": {
+        "slots": [
+          {
+            "channel": 9,
+            "value": 0,
+            "note": "Colour Macro: 253-255 is Color64, UV only; the chart gives every macro all six emitters, UV included, so a macro overrides channels 1-5 and likely 6"
+          },
+          {
+            "channel": 10,
+            "value": 0,
+            "note": "Programs: 0-20 is No Function; 21-140 run colour-change and sound-active programs"
+          },
+          {
+            "channel": 12,
+            "value": 0,
+            "note": "Dimmer Modes: 0-20 is Standard; 101-255 defers to the unit's own setting"
+          }
+        ],
+        "source": "ADJ 5PX Hex / 5PX Hex Pearl User Manual, p.11 (DMX Traits & Values, 12CH) and pp.12-13 (Color Macro Chart). Confirmed on the RDMBench bench on 2026-09-22, unit 1900:88B261B3 on firmware V1.22: every slot at 255 for 150 s lit the unit UV only (checked by eye) and moved its temperature 25 -> 26 C; the same hold with channels 9, 10 and 12 at 0 lit all six emitters and moved it 25 -> 29 C. Write-up: docs/bench.md in the rdmbench repo, 'The load tool meets the 5PX'."
+      }
     }
   ],
   "sensors": [
