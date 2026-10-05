@@ -250,6 +250,10 @@
       "description": "One channel of a [`SlotLayout`].",
       "type": "object",
       "properties": {
+        "by_eye": {
+          "description": "`false` for a channel whose effect no held level shows, so a\nperson cannot judge it by eye: the channel walk rests it rather\nthan walking it, and says why. The 5PX's Dimmer Modes looked the\nsame in every mode under a held level (`docs/bench.md`) — a curve\nthat changes how a level fades, not where it sits. Absent is\n`true`, every other channel.",
+          "type": "boolean"
+        },
         "channel": {
           "description": "1 for the personality's first slot.",
           "type": "integer",
@@ -398,6 +402,13 @@
       "description": "One personality's channels written down from the manual: in effect\nSLOT_INFO, SLOT_DESCRIPTION and DEFAULT_SLOT_VALUE for a fixture that\nimplements none of them.\n\nThe case that filed it: the ADJ 5PX HEX reports no slot table, and\n\"Send DMX…\" could only light it by a tech typing channel numbers out of\nthe manual — one channel is dark (master dimmer at 0) and one level is\nUV only (colour macro at full), `docs/bench.md`. Not the [`LoadPlan`]:\nthat answers what to drive in order to *measure*, this what each\nchannel *is* and where to rest it.",
       "type": "object",
       "properties": {
+        "by_eye_source": {
+          "description": "Who found that a slot cannot be judged by eye (`by_eye: false`),\nand how. Required as soon as one slot says so: it takes a channel\nout of the walk, and a manual never says what a person can see.",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
         "slots": {
           "description": "Every channel the manual names, in channel order.",
           "type": "array",
