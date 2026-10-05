@@ -101,8 +101,12 @@ generated from RDMBench's types. In short:
   RDMBench's channel walk holds while it shows this one, for a channel
   that only changes light another one makes (a master dimmer, a strobe, a
   dimmer curve), which on its own shows nothing. Those levels are the
-  curator's choice too, so any `with` needs a `with_source`. A fixture's
-  own slot table always wins over this one. See
+  curator's choice too, so any `with` needs a `with_source`. A slot can
+  say `"by_eye": false` for a channel whose effect no held level shows —
+  the 5PX's Dimmer Modes looked the same in every mode — and the channel
+  walk rests it instead of showing it, saying why; that is a bench
+  finding, so it needs a `by_eye_source`, and such a slot carries no
+  `with`. A fixture's own slot table always wins over this one. See
   [`adj/5px-12px.json`](adj/5px-12px.json).
 - One file per manufacturer + model ID. Two files for one model is a
   warning from the validator, since a reader cannot tell which to use.
@@ -114,5 +118,6 @@ defined twice, and every `load` plan is sourced, not empty, and names only
 channels inside its personality's footprint, each once. A `slots` layout
 answers to the same, plus: every slot named, its `ranges` in order and not
 overlapping, a `starts_source` whenever a slot has a `start`, a
-`with_source` whenever a slot has a `with`, and every `with` naming
-another channel inside the footprint.
+`with_source` whenever a slot has a `with`, every `with` naming
+another channel inside the footprint, a `by_eye_source` whenever a slot
+says `"by_eye": false`, and no `with` on such a slot.
