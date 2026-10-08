@@ -14,7 +14,9 @@
 // RDMBench, so the checks a maintainer runs by hand are the checks that gate a
 // merge. Task must be on PATH (https://taskfile.dev).
 //
-// The manifest is checked on main and NOT on a pull request: contributors have
+// The manifest and its signature are checked on main — CI only verifies; the
+// signing key is the maintainer's and never on an agent, or a merge would be a
+// release. They are NOT checked on a pull request: contributors have
 // no way to regenerate it (the tool is not public) and are asked not to touch
 // it, so a maintainer regenerates it when merging and this job is what catches
 // a maintainer who forgot.

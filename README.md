@@ -9,7 +9,8 @@ One JSON file per brand, in [`tables/`](tables). This is the library that
 specific to it — the format is plain JSON with a published schema, and any RDM
 tool is welcome to read it.
 
-`tables/` is flat and contains only the tables and their manifest: a bench
+`tables/` is flat and contains only the tables, their manifest and its
+signature: a bench
 fetches that directory raw, its scan of it is non-recursive, and the manifest
 can only name files sitting beside itself. Everything else in this repo is for
 people, not benches.
@@ -152,11 +153,19 @@ does not already have. The version is `YYYYMMDD.N` — the UTC date of the last
 change and a same-day counter — **compared as that pair**, so `20260916.10` is
 newer than `20260916.2`.
 
-There is no server and no release process: a merged pull request is a release.
+`tables/manifest.json.sig` is an Ed25519 signature over the manifest's exact
+bytes, as hex. RDMBench pins the public key
+(`78b20167c1499aba4668bce80b3787fa91e51540c7113137086eab069482b19c`) and
+checks the signature before it reads the manifest, so the hashes mean "the
+maintainer published this" and not just "the server sent this". There is no
+server: a release is a merge whose manifest a maintainer signed. A merge alone
+is not one, and no bench takes a manifest the key did not sign.
 
-The manifest is generated, never hand-edited. Maintainers regenerate it with
-RDMBench's CLI (`task manifest`); CI checks that it matches the files and that
-the version moved when a table changed.
+The manifest and its signature are generated, never hand-edited. Maintainers
+regenerate and sign them with RDMBench's CLI (`task manifest`), on their own
+machine — CI never holds the key. CI checks that the manifest matches the
+files, that the version moved when a table changed, and that the signature is
+good.
 
 ## Contributing
 

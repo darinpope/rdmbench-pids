@@ -42,8 +42,8 @@ the acceptable sources above, and that you are able to release them under
   the manifest cannot name a path, so a nested file is silently ignored by
   every bench.
 - **A filled-in `source`.** A PR without one will be asked for one.
-- **No `tables/manifest.json` change.** It is generated; a maintainer
-  regenerates it when merging. Editing it by hand will conflict.
+- **No `tables/manifest.json` or `manifest.json.sig` change.** They are
+  generated; a maintainer regenerates and signs them when merging. Editing it by hand will conflict.
 
 If you have RDMBench installed, check your file before you push:
 
