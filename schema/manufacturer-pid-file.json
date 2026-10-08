@@ -1,5 +1,5 @@
 {
-  "$id": "https://rdmbench.dev/schema/manufacturer-pid-file.json",
+  "$id": "https://www.rdmbench.com/schema/manufacturer-pid-file.json",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "RDMBench manufacturer PID table",
   "description": "One brand's manufacturer-specific PID names and types — the file format under `manufacturer-pids/` and what `export-pids --out` writes. Sourced from manuals, the fixture's own PARAMETER_DESCRIPTION, or sniffing; never from OLA's PID store.",
