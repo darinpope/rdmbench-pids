@@ -1,5 +1,5 @@
 {
-  "$id": "https://rdmbench.dev/schema/fixture-profile.json",
+  "$id": "https://www.rdmbench.com/schema/fixture-profile.json",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "RDMBench fixture profile",
   "description": "What a *model* is, captured from one unit of it: identity, product category and details, firmware, every DMX personality (name, footprint, E1.37-5 stable ID where the fixture has one), every sensor's definition, and the PIDs it lists — the file format under the library's `profiles/` directory and what `export-profile --out` writes. Harvested self-description: no values, no current state, no slot tables (reading those means switching the fixture's mode).",
