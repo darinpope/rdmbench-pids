@@ -1,5 +1,6 @@
-# Commands for this repo. CI shells out to these, so the same checks run by
-# hand as run on an agent — the arrangement RDMBench itself uses.
+# Commands for this repo, for a maintainer at their own desk. CI runs the same
+# commands written out in the Jenkinsfile instead, because a pull request can
+# edit this file and `task` would run its copy — change both together.
 #
 # Everything here needs `rdmbench-cli` on PATH. That is deliberate: the tool
 # that checks these tables is the same one that loads them on a bench, so

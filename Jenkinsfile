@@ -10,9 +10,13 @@
 // by the code that consumes it. Nothing here needs the RDMBench *sources*,
 // only the built binary on PATH.
 //
-// Command bodies live in Taskfile.yml, not here — same arrangement as
-// RDMBench, so the checks a maintainer runs by hand are the checks that gate a
-// merge. Task must be on PATH (https://taskfile.dev).
+// The commands are written out here rather than run through `task`, unlike
+// RDMBench. `task` reads Taskfile.yml from the checkout, and on a pull request
+// that file is the pull request's own: editing it would run any command on the
+// agent that builds RDMBench. A Jenkinsfile is the one file Jenkins can take
+// from the base branch instead, so what CI runs has to live in it. Taskfile.yml
+// keeps the same commands for a maintainer at their own desk — change both
+// together. Only `rdmbench-cli` and git need to be on PATH.
 //
 // The manifest and its signature are checked on main — CI only verifies; the
 // signing key is the maintainer's and never on an agent, or a merge would be a
@@ -34,16 +38,22 @@ pipeline {
 
     stages {
         stage('versions') {
-            steps { sh 'task versions' }
+            steps {
+                sh 'rdmbench-cli --version'
+                sh 'git --version'
+            }
         }
 
         stage('validate') {
-            steps { sh 'task validate' }
+            steps {
+                sh 'rdmbench-cli validate-tables tables'
+                sh 'rdmbench-cli validate-profiles profiles'
+            }
         }
 
         stage('manifest') {
             when { not { changeRequest() } }
-            steps { sh 'task manifest:check' }
+            steps { sh 'rdmbench-cli pid-manifest tables --check' }
         }
     }
 }
