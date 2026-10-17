@@ -74,10 +74,15 @@ generated from RDMBench's types. In short:
   true of the firmware in `source`; a newer capture of the same model
   replaces the file, with the version moving in `source`.
 - `quirks` is optional and never written by a capture: it records what a
-  model is known to get **wrong**, which the wire cannot show. Each entry
-  is a `kind` (today only `identify-inverted`) and a required `source`
-  giving the bench, the method and the date — an observation someone can
-  repeat, not an opinion. See [`adj/5px-12px.json`](adj/5px-12px.json).
+  model is known to get **wrong**. Each entry is a `kind` and a required
+  `source` giving the bench, the method and the date — an observation
+  someone can repeat, not an opinion. Two kinds today:
+  `identify-inverted`, which the wire cannot show and which RDMBench's
+  report reads the right way round; and `fails-check`, with a `check`
+  naming the RDMBench behaviour check every unit of the model fails
+  (`format-error-on-bad-pdl`, `all-call-get-refused`, …), which the
+  behaviour page shows as known for the model rather than as news about
+  the unit. See [`adj/5px-12px.json`](adj/5px-12px.json).
 - A personality's `load` is optional and never written by a capture: the
   channels a load test must hold at a level of their own because full on
   them is not output — a colour macro, a program, a dimmer mode. The ADJ

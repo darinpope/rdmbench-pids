@@ -515,6 +515,21 @@
     {
       "kind": "identify-inverted",
       "source": "Observed on the RDMBench bench on 2026-09-21, unit 1900:88B261B3 on firmware V1.22. Method: DMX State set to bLC so that with no DMX on the line the resting state is unambiguously dark, then IDENTIFY_DEVICE toggled with nothing else on the line — 1 (identify on) leaves the unit fully dark, 0 (identify off) makes it blink. Both directions, repeated. The unit also powers up in the state it reports as identifying. Write-up: docs/bench.md in the rdmbench repo."
+    },
+    {
+      "kind": "fails-check",
+      "check": "format-error-on-bad-pdl",
+      "source": "Observed on the RDMBench bench on 2026-09-21, unit 1900:88B261B3 on firmware V1.22, by rdmbench-cli behaviour: a GET DEVICE_INFO carrying four bytes of parameter data the PID does not define was answered with an ACK rather than refused (E1.20 §6.3.4). Reproduced from the unit's own wire log, recordings/adj-5px-hex/behaviour-wire.jsonl in the rdmbench repo. Write-up: docs/bench.md."
+    },
+    {
+      "kind": "fails-check",
+      "check": "all-call-get-refused",
+      "source": "Observed on the RDMBench bench on 2026-09-21, unit 1900:88B261B3 on firmware V1.22, by rdmbench-cli behaviour: a GET DEVICE_INFO addressed to SUB_DEVICE_ALL_CALL (0xFFFF) was answered rather than NACKed (E1.20 §9.2.2). Reproduced from the unit's own wire log, recordings/adj-5px-hex/behaviour-wire.jsonl in the rdmbench repo. Write-up: docs/bench.md."
+    },
+    {
+      "kind": "fails-check",
+      "check": "text-printable-ascii",
+      "source": "Observed on the RDMBench bench on 2026-09-22, unit 1900:88B261B3 on firmware V1.22, by rdmbench-cli behaviour: three of the eight text fields it answered carry bytes outside printable ASCII (E1.20 §10.1) — DMX_PERSONALITY_DESCRIPTION 4 reads 43 48 31 32 99 AE and personality 1 reads 43 48 36 00 08, a short name with a NUL and uncleared bytes after it in a fixed-length field. Reproduced from recordings/adj-5px-hex/behaviour-wire.jsonl in the rdmbench repo. Write-up: docs/bench.md."
     }
   ]
 }
