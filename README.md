@@ -137,13 +137,13 @@ yours, and opening a pull request with it is a deliberate act.
 The RDMBench app offers the same export from a report, and can open a
 prefilled issue here with the file attached.
 
-## Fixture profiles
+## Models
 
-[`profiles/`](profiles) holds what a *model* is — every DMX personality with
+[`models/`](models) holds what a *model* is — every DMX personality with
 its footprint, every sensor's definition, the PIDs it lists — one file per
-model, captured from a unit by `rdmbench-cli export-profile` or the app's
-**Contribute Fixture…** button. Same sourcing rule, same licence. See
-[`profiles/README.md`](profiles/README.md).
+model, captured from a unit by `rdmbench-cli export-model` or the app's
+**Contribute Model…** button. Same sourcing rule, same licence. See
+[`models/README.md`](models/README.md).
 
 ## How a bench gets these tables
 

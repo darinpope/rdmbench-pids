@@ -1,4 +1,4 @@
-# Fixture profiles
+# Models
 
 What a *model* is, captured from one unit of it: identity, product category
 and details, firmware, **every** DMX personality (name, footprint, and the
@@ -6,7 +6,7 @@ E1.37-5 stable ID where the fixture has one), every sensor's definition, and
 the PIDs it lists. One JSON file per model, one directory per brand:
 
 ```
-profiles/martin-professional/mac-aura.json
+models/martin-professional/mac-aura.json
 ```
 
 Harvested self-description, like the PID tables — the fixture's own
@@ -14,14 +14,14 @@ DEVICE_INFO, DMX_PERSONALITY_DESCRIPTION and SENSOR_DEFINITION answers — and
 so free, public and CC0. What it is *not*: readings, the unit's current
 mode, or per-personality slot tables (reading those means switching the
 fixture's mode, so they are left out on purpose; the footprint is what a
-profile records about a mode).
+model file records about a mode).
 
 A bench fetches this directory with the tables. `tables/manifest.json` has
-a `profiles` map, the sha256 of every file here keyed by its path under
-`profiles/`. It is the same manifest with one version, so a changed profile
+a `models` map, the sha256 of every file here keyed by its path under
+`models/`. It is the same manifest with one version, so a changed model file
 is a release just as a changed table is. Unlike `tables/`, which must stay
-flat, `profiles/` is organised for people and any depth is fine. A bench
-reads a profile only for its `quirks` and its personalities' `load` plans
+flat, `models/` is organised for people and any depth is fine. A bench
+reads a model file only for its `quirks` and its personalities' `load` plans
 and `slots` layouts — for everything else the bench has the fixture in front
 of it. The feature the rest makes possible ("what does channel 9 do in the
 mode the desk is patched for?", answerable without the fixture) comes after.
@@ -29,18 +29,18 @@ mode the desk is patched for?", answerable without the fixture) comes after.
 ## Capturing one
 
 ```
-rdmbench-cli export-profile --share -o mac-aura.json
+rdmbench-cli export-model --share -o mac-aura.json
 ```
 
-or **Contribute Fixture…** in the RDMBench report. Either reads every
+or **Contribute Model…** in the RDMBench report. Either reads every
 personality from the fixture (a snapshot deliberately reads only the current
-one), prints where the file belongs under `profiles/`, and — in the app —
+one), prints where the file belongs under `models/`, and — in the app —
 opens a prefilled pull request. `--share` withholds the unit's UID; the
 device label is never included.
 
 ## Format
 
-The contract is [`schema/fixture-profile.json`](../schema/fixture-profile.json),
+The contract is [`schema/model.json`](../schema/model.json),
 generated from RDMBench's types. In short:
 
 ```json
@@ -70,7 +70,7 @@ generated from RDMBench's types. In short:
 ```
 
 - `source` is required, as for the tables — see the [sourcing rule](../README.md#sourcing-rule).
-- Personalities and sensors change between firmware versions. A profile is
+- Personalities and sensors change between firmware versions. A model file is
   true of the firmware in `source`; a newer capture of the same model
   replaces the file, with the version moving in `source`.
 - `quirks` is optional and never written by a capture: it records what a
@@ -116,8 +116,8 @@ generated from RDMBench's types. In short:
 - One file per manufacturer + model ID. Two files for one model is a
   warning from the validator, since a reader cannot tell which to use.
 
-CI runs `rdmbench-cli validate-profiles profiles` on every pull request:
-each file parses as a profile, names a source, comes from a real ESTA
+CI runs `rdmbench-cli validate-models models` on every pull request:
+each file parses as a model file, names a source, comes from a real ESTA
 registration (no prototyping-block IDs), and no personality or sensor is
 defined twice, and every `load` plan is sourced, not empty, and names only
 channels inside its personality's footprint, each once. A `slots` layout

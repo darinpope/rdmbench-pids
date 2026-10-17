@@ -53,7 +53,7 @@ pipeline {
         stage('validate') {
             steps {
                 sh 'rdmbench-cli validate-tables tables'
-                sh 'rdmbench-cli validate-profiles profiles'
+                sh 'rdmbench-cli validate-models models'
             }
         }
 

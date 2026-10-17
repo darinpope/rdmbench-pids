@@ -67,14 +67,14 @@ rdmbench-cli export-pids --share -o <brand>.json
 `--share` withholds your unit's UID. The device label is never included. Check
 the file over before opening a PR; you are publishing it.
 
-## Fixture profiles
+## Models
 
-A profile is a different kind of file: what a model *is* rather than what
-its private PIDs are called. It goes in `profiles/<brand>/<model>.json`, is
-captured the same way (`rdmbench-cli export-profile --share`, or the app),
-and is checked by `rdmbench-cli validate-profiles profiles`. One file per
+A model file is a different kind of file: what a model *is* rather than what
+its private PIDs are called. It goes in `models/<brand>/<model>.json`, is
+captured the same way (`rdmbench-cli export-model --share`, or the app),
+and is checked by `rdmbench-cli validate-models models`. One file per
 model; a capture from newer firmware replaces the old one. Details in
-[`profiles/README.md`](profiles/README.md).
+[`models/README.md`](models/README.md).
 
 ## A note on what is missing
 
