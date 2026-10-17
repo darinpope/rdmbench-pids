@@ -10,6 +10,12 @@
 // by the code that consumes it. Nothing here needs the RDMBench *sources*,
 // only the built binary on PATH.
 //
+// That binary is the *released* rdmbench-cli, put there by RDMBench's release
+// job once a release is live — not a build of RDMBench's main. So this job
+// refuses anything a released bench could not read, such as a quirk kind newer
+// than the last release (RDMBench docs/decisions.md, "The library is checked
+// by the released CLI").
+//
 // The commands are written out here rather than run through `task`, unlike
 // RDMBench. `task` reads Taskfile.yml from the checkout, and on a pull request
 // that file is the pull request's own: editing it would run any command on the
