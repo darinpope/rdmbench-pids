@@ -13,6 +13,7 @@ version: '3'
 
 vars:
   CLI: '{{.CLI | default "rdmbench-cli"}}'
+  TIMESTAMP_KEY_REF: '{{.TIMESTAMP_KEY_REF | default "op://RDMBench/RDMBench PID library timestamp key/password"}}'
 
 tasks:
   default:
@@ -44,14 +45,6 @@ tasks:
     cmds:
       - '{{.CLI}} pid-manifest tables --check'
 
-  manifest:fresh:
-    desc: |
-      manifest:check, and fail when the signature has fewer than 14 days
-      left: a missed weekly re-sign shows here two weeks before a bench
-      stops updating.
-    cmds:
-      - '{{.CLI}} pid-manifest tables --check --fresh'
-
   manifest:
     desc: |
       Regenerate and sign tables/manifest.json, which covers models/ too (the
@@ -62,16 +55,18 @@ tasks:
     cmds:
       - '{{.CLI}} pid-manifest tables'
 
-  manifest:resign:
+  timestamp:check:
     desc: |
-      Sign tables/manifest.json again with today's date, then commit and push
-      it. A signature is good for 30 days and a bench refuses one past that,
-      so this runs weekly (maintainer/com.rdmbench.pids-resign.plist) on the
-      machine that holds the key; the version does not move, so it is not an
-      update. Also catches up a table change nobody signed.
+      Verify tables/timestamp.json: signed by the timestamp key RDMBench
+      trusts, for the manifest beside it, and not expired. A bench refuses
+      the library without one.
     cmds:
-      - git pull --ff-only
-      - '{{.CLI}} pid-manifest tables --resign'
-      - git add tables/manifest.json tables/manifest.json.sig
-      - git commit -m "Manifest re-signed $(date -u +%Y-%m-%d)"
-      - git push
+      - '{{.CLI}} pid-timestamp tables --check'
+
+  timestamp:
+    desc: |
+      Sign tables/timestamp.json — that the manifest is current, for 30 days —
+      if the manifest changed or the last stamp is a week old. CI runs this
+      daily; by hand, it reads the key from 1Password, its only copy.
+    cmds:
+      - RDMBENCH_TIMESTAMP_KEY="$(op read '{{.TIMESTAMP_KEY_REF}}')" {{.CLI}} pid-timestamp tables
