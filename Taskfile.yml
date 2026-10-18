@@ -44,6 +44,14 @@ tasks:
     cmds:
       - '{{.CLI}} pid-manifest tables --check'
 
+  manifest:fresh:
+    desc: |
+      manifest:check, and fail when the signature has fewer than 14 days
+      left: a missed weekly re-sign shows here two weeks before a bench
+      stops updating.
+    cmds:
+      - '{{.CLI}} pid-manifest tables --check --fresh'
+
   manifest:
     desc: |
       Regenerate and sign tables/manifest.json, which covers models/ too (the
@@ -53,3 +61,17 @@ tasks:
       the signing key from the login Keychain (`rdmbench-cli pid-key`).
     cmds:
       - '{{.CLI}} pid-manifest tables'
+
+  manifest:resign:
+    desc: |
+      Sign tables/manifest.json again with today's date, then commit and push
+      it. A signature is good for 30 days and a bench refuses one past that,
+      so this runs weekly (maintainer/com.rdmbench.pids-resign.plist) on the
+      machine that holds the key; the version does not move, so it is not an
+      update. Also catches up a table change nobody signed.
+    cmds:
+      - git pull --ff-only
+      - '{{.CLI}} pid-manifest tables --resign'
+      - git add tables/manifest.json tables/manifest.json.sig
+      - git commit -m "Manifest re-signed $(date -u +%Y-%m-%d)"
+      - git push

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+  The weekly re-sign of tables/manifest.json (`task manifest:resign`), as a
+  LaunchAgent on the maintainer's Mac: the signing key is in that login's
+  Keychain and never on CI, so this is the only place it can run. A signature
+  is good for 30 days; weekly leaves three missed weeks before a bench
+  notices, and `task manifest:fresh` fails two weeks before that.
+
+  Install: copy to ~/Library/LaunchAgents/, set WorkingDirectory below for this
+  machine, then `launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/com.rdmbench.pids-resign.plist`.
+  A Mac asleep at the hour runs it on waking.
+-->
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.rdmbench.pids-resign</string>
+    <key>WorkingDirectory</key>
+    <string>/Users/dpope/github/rdmbench-pids</string>
+    <key>ProgramArguments</key>
+    <array>
+        <string>/bin/zsh</string>
+        <string>-lc</string>
+        <string>task manifest:resign</string>
+    </array>
+    <key>StartCalendarInterval</key>
+    <dict>
+        <key>Weekday</key>
+        <integer>1</integer>
+        <key>Hour</key>
+        <integer>9</integer>
+        <key>Minute</key>
+        <integer>0</integer>
+    </dict>
+    <key>StandardOutPath</key>
+    <string>/tmp/com.rdmbench.pids-resign.log</string>
+    <key>StandardErrorPath</key>
+    <string>/tmp/com.rdmbench.pids-resign.log</string>
+</dict>
+</plist>
