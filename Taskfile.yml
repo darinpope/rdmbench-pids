@@ -13,7 +13,7 @@ version: '3'
 
 vars:
   CLI: '{{.CLI | default "rdmbench-cli"}}'
-  TIMESTAMP_KEY_REF: '{{.TIMESTAMP_KEY_REF | default "op://RDMBench/RDMBench PID library timestamp key/password"}}'
+  TIMESTAMP_KEY_REF: '{{.TIMESTAMP_KEY_REF | default "op://RDMBench CI/RDMBench PID library timestamp key/password"}}'
 
 tasks:
   default:
@@ -54,6 +54,9 @@ tasks:
       the signing key from the login Keychain (`rdmbench-cli pid-key`).
     cmds:
       - '{{.CLI}} pid-manifest tables'
+      # A new manifest needs a stamp naming it, or benches skip the
+      # release until CI's daily run; the stamp's key comes from 1Password.
+      - task: timestamp
 
   timestamp:check:
     desc: |
