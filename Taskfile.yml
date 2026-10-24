@@ -14,6 +14,8 @@ version: '3'
 vars:
   CLI: '{{.CLI | default "rdmbench-cli"}}'
   TIMESTAMP_KEY_REF: '{{.TIMESTAMP_KEY_REF | default "op://RDMBench CI/RDMBench PID library timestamp key/password"}}'
+  SIGNING_KEY_DOC: '{{.SIGNING_KEY_DOC | default "RDMBench PID library signing key"}}'
+  SIGNING_KEY_VAULT: '{{.SIGNING_KEY_VAULT | default "RDMBench"}}'
 
 tasks:
   default:
@@ -51,12 +53,34 @@ tasks:
       sibling of tables/). Maintainers only, at merge time: the version
       moves only when a table or a model file changed, and a merge to main
       with a moved version and a fresh signature is what a release is. Reads
-      the signing key from the login Keychain (`rdmbench-cli pid-key`).
+      the signing key from the login Keychain (`rdmbench-cli pid-key`),
+      importing it from 1Password first on a Mac that lacks it (`key`).
     cmds:
+      - task: key
       - '{{.CLI}} pid-manifest tables'
       # A new manifest needs a stamp naming it, or benches skip the
       # release until CI's daily run; the stamp's key comes from 1Password.
       - task: timestamp
+
+  key:
+    desc: |
+      The library signing key into this Mac's login Keychain, from its backup
+      in 1Password ("{{.SIGNING_KEY_DOC}}" in {{.SIGNING_KEY_VAULT}}),
+      when it is not there; nothing when it is. The file exists only in a
+      private temporary directory, deleted however the import ends. A new
+      rdmbench-cli may ask once for the Keychain password (Always Allow).
+    status:
+      - '{{.CLI}} pid-key >/dev/null 2>&1'
+    cmds:
+      - |
+        dir=$(mktemp -d)
+        op document get "{{.SIGNING_KEY_DOC}}" --vault "{{.SIGNING_KEY_VAULT}}" --out-file "$dir/key" \
+          && {{.CLI}} pid-key --import "$dir/key"
+        status=$?
+        rm -rf "$dir"
+        exit $status
+      # Says the public half and whether this build trusts it.
+      - '{{.CLI}} pid-key'
 
   timestamp:check:
     desc: |
