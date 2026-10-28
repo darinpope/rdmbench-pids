@@ -1,0 +1,266 @@
+{
+  "manufacturer_id": "0x024A",
+  "manufacturer": "SHEHDS",
+  "model_id": "0x0000",
+  "model": "GlamoPar07A (LED Par 7x12W RGBWA+UV)",
+  "product_category": "Fixture (other)",
+  "product_category_id": "0x01FF",
+  "product_details": [
+    "LED"
+  ],
+  "software_version_id": "0x00000001",
+  "software_version": "V1.0 13-07-2021 05:20",
+  "protocol_version": "1.0",
+  "sub_device_count": 0,
+  "personalities": [
+    {
+      "number": 1,
+      "name": "11CH",
+      "footprint": 11,
+      "load": {
+        "slots": [
+          {
+            "channel": 2,
+            "value": 0,
+            "note": "Strobe: 0-5 is None; 6-255 strobes slow to fast"
+          },
+          {
+            "channel": 3,
+            "value": 0,
+            "note": "Auto mode / Sound mode: 0-5 is None; 6-200 run auto programs and 201-255 is sound mode, which the manual says takes the unit off DMX control"
+          },
+          {
+            "channel": 4,
+            "value": 0,
+            "note": "Mode Speed: the auto programs' speed, nothing while channel 3 is at None"
+          },
+          {
+            "channel": 11,
+            "value": 0,
+            "note": "Color mode: 'Color selection' over 0-255, with no bands in the manual; a colour selection is a macro that may override channels 5-10"
+          }
+        ],
+        "source": "Shehds 'LED Par 7x12W RGBWA+UV Lighting' user manual (the one shipped with the GlamoPar07A), p.11 (DMX Channel Summary, 11 Channels Mode) and p.10 ('In the current mode, the DMA signal is not controlled!', of sound mode). Confirmed on the RDMBench bench on 2026-10-28, unit 024A:6B720501 on software V1.0 13-07-2021 05:20 at address 13: every other slot at 255 for 30 s with these four at 0 lit it steady white, no strobe or colour change (checked by eye), and moved its temperature 27 -> 35 C. Wire log: recordings/shehds-glamopar-07a/load-lit-wire.jsonl in the rdmbench repo. Write-up: docs/bench.md in the rdmbench repo, 'The GlamoPar 07A answers'."
+      },
+      "slots": {
+        "slots": [
+          {
+            "channel": 1,
+            "name": "Dimmer",
+            "start": 255,
+            "with": [
+              {
+                "channel": 8,
+                "value": 255
+              }
+            ]
+          },
+          {
+            "channel": 2,
+            "name": "Strobe",
+            "ranges": [
+              {
+                "from": 0,
+                "to": 5,
+                "meaning": "None"
+              },
+              {
+                "from": 6,
+                "to": 255,
+                "meaning": "Strobe speed - slow to fast"
+              }
+            ],
+            "start": 0,
+            "with": [
+              {
+                "channel": 8,
+                "value": 255
+              }
+            ]
+          },
+          {
+            "channel": 3,
+            "name": "Auto mode / Sound mode",
+            "ranges": [
+              {
+                "from": 0,
+                "to": 5,
+                "meaning": "None"
+              },
+              {
+                "from": 6,
+                "to": 100,
+                "meaning": "Auto mode 1 (Color Jump change)"
+              },
+              {
+                "from": 101,
+                "to": 150,
+                "meaning": "Auto mode 2 (Color Gradient change)"
+              },
+              {
+                "from": 151,
+                "to": 200,
+                "meaning": "Auto mode 3 (Color Pulse Change)"
+              },
+              {
+                "from": 201,
+                "to": 255,
+                "meaning": "Sound mode"
+              }
+            ],
+            "start": 0
+          },
+          {
+            "channel": 4,
+            "name": "Mode Speed",
+            "ranges": [
+              {
+                "from": 0,
+                "to": 255,
+                "meaning": "Auto mode speed"
+              }
+            ],
+            "start": 0,
+            "with": [
+              {
+                "channel": 3,
+                "value": 50
+              }
+            ]
+          },
+          {
+            "channel": 5,
+            "name": "Red",
+            "start": 0
+          },
+          {
+            "channel": 6,
+            "name": "Green",
+            "start": 0
+          },
+          {
+            "channel": 7,
+            "name": "Blue",
+            "start": 0
+          },
+          {
+            "channel": 8,
+            "name": "White",
+            "start": 0
+          },
+          {
+            "channel": 9,
+            "name": "Amber",
+            "start": 0
+          },
+          {
+            "channel": 10,
+            "name": "Violet",
+            "start": 0
+          },
+          {
+            "channel": 11,
+            "name": "Color mode",
+            "ranges": [
+              {
+                "from": 0,
+                "to": 255,
+                "meaning": "Color selection"
+              }
+            ],
+            "start": 0
+          }
+        ],
+        "source": "Shehds 'LED Par 7x12W RGBWA+UV Lighting' user manual (the one shipped with the GlamoPar07A), p.11 (DMX Channel Summary, 11 Channels Mode: names and the bands of channels 2 and 3; channel 11 is given only as 'Color selection, 0-255').",
+        "starts_source": "The RDMBench bench's own choice, not the manual's, which gives ranges and no defaults: every emitter at 0, the dimmer at full and channels 2, 3, 4 and 11 at 0 (strobe None, auto/sound None, speed 0, colour selection 0) — a unit that is ready and dark, lit by raising one colour. The manual is silent on what channel 11 at 0 does. Confirmed on 2026-10-28, unit 024A:6B720501 on software V1.0 13-07-2021 05:20 in 11CH: dimmer and red at 255 with every other slot 0 lit it solid red (checked by eye), so channel 11 at 0 selects nothing over the emitters. Wire log: recordings/shehds-glamopar-07a/red-check-11ch-wire.jsonl in the rdmbench repo.",
+        "with_source": "The RDMBench bench's own choice, not the manual's, carried over from the ADJ 5PX (2026-10-03, docs/bench.md in the rdmbench repo, 'The channel walk on the 5PX'), where a dimmer and a strobe walked with every emitter dark showed nothing and healthy channels were failed. So the dimmer and the strobe are walked with white at full, and the mode speed with channel 3 at 50 (Auto mode 1), since a speed shows only while a program runs. Not yet walked on this model."
+      }
+    },
+    {
+      "number": 2,
+      "name": "6CH",
+      "footprint": 6,
+      "slots": {
+        "slots": [
+          {
+            "channel": 1,
+            "name": "Red",
+            "start": 0
+          },
+          {
+            "channel": 2,
+            "name": "Green",
+            "start": 0
+          },
+          {
+            "channel": 3,
+            "name": "Blue",
+            "start": 0
+          },
+          {
+            "channel": 4,
+            "name": "White",
+            "start": 0
+          },
+          {
+            "channel": 5,
+            "name": "Amber",
+            "start": 0
+          },
+          {
+            "channel": 6,
+            "name": "Violet",
+            "start": 0
+          }
+        ],
+        "source": "Shehds 'LED Par 7x12W RGBWA+UV Lighting' user manual (the one shipped with the GlamoPar07A), p.11 (DMX Channel Summary, 6 Channels Mode).",
+        "starts_source": "The RDMBench bench's own choice, not the manual's, which gives ranges and no defaults: every emitter at 0, a unit that is dark and lit by raising one colour."
+      }
+    }
+  ],
+  "sensors": [
+    {
+      "number": 0,
+      "name": "Temperature(oC)",
+      "kind": "temperature",
+      "unit": "°C",
+      "range": [
+        0.0,
+        100.0
+      ],
+      "normal": [
+        0.0,
+        100.0
+      ],
+      "records_lowest_highest": false,
+      "records_value": false
+    }
+  ],
+  "supported_parameters": [
+    "0x0060",
+    "0x00F0",
+    "0x00C2",
+    "0x00E0",
+    "0x00E1",
+    "0x1000",
+    "0x0200",
+    "0x0201",
+    "0x0080",
+    "0x0082",
+    "0x0070",
+    "0x00C0"
+  ],
+  "source": "Captured by RDMBench 0.7.0 from the fixture's own DEVICE_INFO / DMX_PERSONALITY_DESCRIPTION / SENSOR_DEFINITION, unit 024A:6B720501, software V1.0 13-07-2021 05:20, 2026-10-28. Its identity is not its own: the unit reports MANUFACTURER_LABEL 'Canara' and DEVICE_MODEL_DESCRIPTION 'LED 2 color' under ESTA ID 0x024A, which is not in the ESTA manufacturer table (Canara Lighting Industries' registration is 0x06AE), with model ID 0x0000. The manufacturer and model here are the order's (SHEHDS, 'GlamoPar LED Lighting 7x12W', SH-GLAMOP07A-BPUS, model number GlamoPar07A) and the shipped manual's (RGBWA+UV, 11/6CH); the personalities, sensor and PIDs are the fixture's. The manual's 'RDM function' table (p.11) promises three things — the address and the channel mode changeable, the fixture temperature read-only — which the PIDs the unit lists agree with. Any other product on the same firmware will carry the same manufacturer and model IDs and match this file. Write-up: docs/bench.md in the rdmbench repo, 'The GlamoPar 07A answers'.",
+  "quirks": [
+    {
+      "kind": "fails-check",
+      "check": "format-error-on-bad-pdl",
+      "source": "Observed on the RDMBench bench on 2026-10-28, unit 024A:6B720501 on software V1.0 13-07-2021 05:20, by rdmbench-cli behaviour: a GET DEVICE_INFO carrying four bytes of parameter data the PID does not define was answered rather than refused (E1.20 §6.3.4). Wire log: recordings/shehds-glamopar-07a/behaviour-wire.jsonl in the rdmbench repo."
+    },
+    {
+      "kind": "fails-check",
+      "check": "all-call-get-refused",
+      "source": "Observed on the RDMBench bench on 2026-10-28, unit 024A:6B720501 on software V1.0 13-07-2021 05:20, by rdmbench-cli behaviour: a GET addressed to SUB_DEVICE_ALL_CALL (0xFFFF) was answered rather than NACKed (E1.20 §9.2.2). Wire log: recordings/shehds-glamopar-07a/behaviour-wire.jsonl in the rdmbench repo."
+    }
+  ]
+}
