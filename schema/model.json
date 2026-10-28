@@ -228,6 +228,17 @@
             "null"
           ]
         },
+        "setup": {
+          "description": "What to set on the unit's own panel for it to be in this\npersonality — see [`SetupNote`]. Never written by\n[`capture_profile`]: the wire says which mode a unit is in, never\nhow to put it there.",
+          "anyOf": [
+            {
+              "$ref": "#/$defs/SetupNote"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
         "slots": {
           "description": "What each channel of this personality is, for a fixture that does\nnot say so itself — see [`SlotLayout`]. Never written by\n[`capture_profile`]; every layout is a curator's, from the manual.",
           "anyOf": [
@@ -333,6 +344,11 @@
           "const": "fails-check"
         },
         {
+          "description": "DEVICE_INFO's DMX footprint (§10.5.1) does not follow the\npersonality: the unit reports one number in every mode while each\npersonality describes, and listens to, its own. Visible on the\nwire — `config-footprint-disagrees` finds it in every mode but the\none where the two happen to agree — and placed around already, by\nthe smaller; what the entry changes is the sentence, from \"may be\nmid-mode-change\" to a fault the model is known for.",
+          "type": "string",
+          "const": "footprint-stuck"
+        },
+        {
           "description": "A kind written by a newer build than this one. Carried through\nunchanged so a round trip does not drop it, and acted on by\nnothing: a bench that cannot name a quirk must not guess at it.",
           "type": "string"
         }
@@ -408,6 +424,24 @@
         "normal",
         "records_lowest_highest",
         "records_value"
+      ]
+    },
+    "SetupNote": {
+      "description": "How to put a unit in one personality from its own panel — \"Menu →\nPersonality → Extended, then Color Calibration → On\" — which is what a\nwrong-mode row is for: telling the tech what to do at the fixture.\n\nA grandMA2's fixture types carry the same line (\"Set menu option … for\nthis personality\"), and the patch check quotes the desk's where it has\none, but MA's text is a third-party dataset and never copied here\n(`docs/decisions.md`, \"Not a channel-layout library\"). This is the\ncurator's, from the manufacturer's manual.",
+      "type": "object",
+      "properties": {
+        "note": {
+          "description": "What to set, in the curator's words. Shown verbatim and never\ntranslated, as a load plan's notes are.",
+          "type": "string"
+        },
+        "source": {
+          "description": "The manual, its revision and its page. Required: a wrong note sends\na tech into the wrong menu on a unit that is otherwise fine.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "note",
+        "source"
       ]
     },
     "SlotLayout": {

@@ -21,8 +21,8 @@ a `models` map, the sha256 of every file here keyed by its path under
 `models/`. It is the same manifest with one version, so a changed model file
 is a release just as a changed table is. Unlike `tables/`, which must stay
 flat, `models/` is organised for people and any depth is fine. A bench
-reads a model file only for its `quirks` and its personalities' `load` plans
-and `slots` layouts — for everything else the bench has the fixture in front
+reads a model file only for its `quirks` and its personalities' `load` plans,
+`slots` layouts and `setup` notes — for everything else the bench has the fixture in front
 of it. The feature the rest makes possible ("what does channel 9 do in the
 mode the desk is patched for?", answerable without the fixture) comes after.
 
@@ -113,6 +113,16 @@ generated from RDMBench's types. In short:
   finding, so it needs a `by_eye_source`, and such a slot carries no
   `with`. A fixture's own slot table always wins over this one. See
   [`adj/5px-12px.json`](adj/5px-12px.json).
+- A personality's `setup` is optional and never written by a capture, since
+  the wire says which mode a unit is in but never how to put it there: what
+  to set on the unit's own panel for it to be in this mode, as a `note` in
+  the curator's words and a required `source` naming the manual, its
+  revision and its page. A wrong note sends a tech into the wrong menu on a
+  unit that is otherwise fine, so where the manual and the unit disagree,
+  the source says which the note follows and why. RDMBench's patch check
+  quotes it on a wrong-mode row, for the mode the show expects. A desk's
+  own fixture types carry lines like this; theirs are never copied in. See
+  [`adj/5px-12px.json`](adj/5px-12px.json).
 - One file per manufacturer + model ID. Two files for one model is a
   warning from the validator, since a reader cannot tell which to use.
 
@@ -125,4 +135,5 @@ answers to the same, plus: every slot named, its `ranges` in order and not
 overlapping, a `starts_source` whenever a slot has a `start`, a
 `with_source` whenever a slot has a `with`, every `with` naming
 another channel inside the footprint, a `by_eye_source` whenever a slot
-says `"by_eye": false`, and no `with` on such a slot.
+says `"by_eye": false`, and no `with` on such a slot. A `setup` note
+must say something and name a source.
