@@ -48,11 +48,11 @@
           }
         ],
         "source": "ADJ 5PX Hex / 5PX Hex Pearl User Manual, p.11 (DMX Traits & Values: names, and the bands of channels 8, 10, 11 and 12) and pp.12-13 (Color Macro Chart: channel 9's bands, read from which emitters each macro uses). The 6, 7 and 8 channel modes are the first 6, 7 and 8 channels of the 12 channel one, as the manual's table lays them out.",
-        "starts_source": "The RDMBench bench's own choice, not the manual's, which gives ranges and no defaults. Every emitter at 0, the master dimmer at full, the strobe on LED On (255) and channels 9-12 at 0 (macro Off, programs No Function, speed 0, Standard dimmer mode — the levels the load plan holds them at): a unit that is ready and dark, lit by raising one colour. Confirmed on 2026-10-01, unit 1900:88B261B3 on firmware V1.22 in 12CH: red, master dimmer and strobe at 255 with nothing else sent lit it solid red (checked by eye)."
+        "starts_source": "The RDMBench bench's own choice, not the manual's, which gives ranges and no defaults. Every emitter at 0, the master dimmer at full, the strobe on LED On (255) and channels 9-12 at 0 (macro Off, programs No Function, speed 0, Standard dimmer mode — the levels the load plan holds them at): a unit that is ready and dark, lit by raising one colour. Confirmed on 2026-10-01, one unit on firmware V1.22 in 12CH: red, master dimmer and strobe at 255 with nothing else sent lit it solid red (checked by eye)."
       },
       "setup": {
         "note": "On the unit's panel: if the buttons do nothing, hold MODE for 3 seconds to unlock it. Press MODE until the address shows (A001 for address 1), press ENTER once, then UP or DOWN until it reads Ch06.",
-        "source": "ADJ 5PX Hex / 5PX Hex Pearl User Manual, document version 3 (02/19/21, for software 1.19 and later), p.16 (Operating Instructions, DMX Mode, steps 2-3) and p.15 (Control Panel Lock). The manual's bullets under step 3 say to press MODE until the mode shows, which contradicts step 3 itself. The note follows steps 2-3, whose ENTER is what the unit did. On the bench, 2026-10-23, unit 1900:88B261B3 on firmware V1.22: unlocked, one ENTER from A001 showed the mode the unit was in (Ch06 after a SET to personality 1 over RDM). Changing it with UP or DOWN was not itself pressed there."
+        "source": "ADJ 5PX Hex / 5PX Hex Pearl User Manual, document version 3 (02/19/21, for software 1.19 and later), p.16 (Operating Instructions, DMX Mode, steps 2-3) and p.15 (Control Panel Lock). The manual's bullets under step 3 say to press MODE until the mode shows, which contradicts step 3 itself. The note follows steps 2-3, whose ENTER is what the unit did. On the bench, 2026-10-23, one unit on firmware V1.22: unlocked, one ENTER from A001 showed the mode the unit was in (Ch06 after a SET to personality 1 over RDM). Changing it with UP or DOWN was not itself pressed there."
       }
     },
     {
@@ -104,12 +104,12 @@
           }
         ],
         "source": "ADJ 5PX Hex / 5PX Hex Pearl User Manual, p.11 (DMX Traits & Values: names, and the bands of channels 8, 10, 11 and 12) and pp.12-13 (Color Macro Chart: channel 9's bands, read from which emitters each macro uses). The 6, 7 and 8 channel modes are the first 6, 7 and 8 channels of the 12 channel one, as the manual's table lays them out.",
-        "starts_source": "The RDMBench bench's own choice, not the manual's, which gives ranges and no defaults. Every emitter at 0, the master dimmer at full, the strobe on LED On (255) and channels 9-12 at 0 (macro Off, programs No Function, speed 0, Standard dimmer mode — the levels the load plan holds them at): a unit that is ready and dark, lit by raising one colour. Confirmed on 2026-10-01, unit 1900:88B261B3 on firmware V1.22 in 12CH: red, master dimmer and strobe at 255 with nothing else sent lit it solid red (checked by eye).",
-        "with_source": "The RDMBench bench's own choice, not the manual's. With every emitter at its start (0), the master dimmer and the strobe change light no other channel is making, so a channel walk showed nothing on either and a tech failed healthy channels (2026-10-03, unit 1900:88B261B3 on firmware V1.22 in 12CH). So each is walked with white at full: the brightest single emitter and the easiest light to judge a dim or a strobe against."
+        "starts_source": "The RDMBench bench's own choice, not the manual's, which gives ranges and no defaults. Every emitter at 0, the master dimmer at full, the strobe on LED On (255) and channels 9-12 at 0 (macro Off, programs No Function, speed 0, Standard dimmer mode — the levels the load plan holds them at): a unit that is ready and dark, lit by raising one colour. Confirmed on 2026-10-01, one unit on firmware V1.22 in 12CH: red, master dimmer and strobe at 255 with nothing else sent lit it solid red (checked by eye).",
+        "with_source": "The RDMBench bench's own choice, not the manual's. With every emitter at its start (0), the master dimmer and the strobe change light no other channel is making, so a channel walk showed nothing on either and a tech failed healthy channels (2026-10-03, one unit on firmware V1.22 in 12CH). So each is walked with white at full: the brightest single emitter and the easiest light to judge a dim or a strobe against."
       },
       "setup": {
         "note": "On the unit's panel: if the buttons do nothing, hold MODE for 3 seconds to unlock it. Press MODE until the address shows (A001 for address 1), press ENTER once, then UP or DOWN until it reads Ch07.",
-        "source": "ADJ 5PX Hex / 5PX Hex Pearl User Manual, document version 3 (02/19/21, for software 1.19 and later), p.16 (Operating Instructions, DMX Mode, steps 2-3) and p.15 (Control Panel Lock). The manual's bullets under step 3 say to press MODE until the mode shows, which contradicts step 3 itself. The note follows steps 2-3, whose ENTER is what the unit did. On the bench, 2026-10-23, unit 1900:88B261B3 on firmware V1.22: unlocked, one ENTER from A001 showed the mode the unit was in (Ch06 after a SET to personality 1 over RDM). Changing it with UP or DOWN was not itself pressed there."
+        "source": "ADJ 5PX Hex / 5PX Hex Pearl User Manual, document version 3 (02/19/21, for software 1.19 and later), p.16 (Operating Instructions, DMX Mode, steps 2-3) and p.15 (Control Panel Lock). The manual's bullets under step 3 say to press MODE until the mode shows, which contradicts step 3 itself. The note follows steps 2-3, whose ENTER is what the unit did. On the bench, 2026-10-23, one unit on firmware V1.22: unlocked, one ENTER from A001 showed the mode the unit was in (Ch06 after a SET to personality 1 over RDM). Changing it with UP or DOWN was not itself pressed there."
       }
     },
     {
@@ -214,12 +214,12 @@
           }
         ],
         "source": "ADJ 5PX Hex / 5PX Hex Pearl User Manual, p.11 (DMX Traits & Values: names, and the bands of channels 8, 10, 11 and 12) and pp.12-13 (Color Macro Chart: channel 9's bands, read from which emitters each macro uses). The 6, 7 and 8 channel modes are the first 6, 7 and 8 channels of the 12 channel one, as the manual's table lays them out.",
-        "starts_source": "The RDMBench bench's own choice, not the manual's, which gives ranges and no defaults. Every emitter at 0, the master dimmer at full, the strobe on LED On (255) and channels 9-12 at 0 (macro Off, programs No Function, speed 0, Standard dimmer mode — the levels the load plan holds them at): a unit that is ready and dark, lit by raising one colour. Confirmed on 2026-10-01, unit 1900:88B261B3 on firmware V1.22 in 12CH: red, master dimmer and strobe at 255 with nothing else sent lit it solid red (checked by eye).",
-        "with_source": "The RDMBench bench's own choice, not the manual's. With every emitter at its start (0), the master dimmer and the strobe change light no other channel is making, so a channel walk showed nothing on either and a tech failed healthy channels (2026-10-03, unit 1900:88B261B3 on firmware V1.22 in 12CH). So each is walked with white at full: the brightest single emitter and the easiest light to judge a dim or a strobe against."
+        "starts_source": "The RDMBench bench's own choice, not the manual's, which gives ranges and no defaults. Every emitter at 0, the master dimmer at full, the strobe on LED On (255) and channels 9-12 at 0 (macro Off, programs No Function, speed 0, Standard dimmer mode — the levels the load plan holds them at): a unit that is ready and dark, lit by raising one colour. Confirmed on 2026-10-01, one unit on firmware V1.22 in 12CH: red, master dimmer and strobe at 255 with nothing else sent lit it solid red (checked by eye).",
+        "with_source": "The RDMBench bench's own choice, not the manual's. With every emitter at its start (0), the master dimmer and the strobe change light no other channel is making, so a channel walk showed nothing on either and a tech failed healthy channels (2026-10-03, one unit on firmware V1.22 in 12CH). So each is walked with white at full: the brightest single emitter and the easiest light to judge a dim or a strobe against."
       },
       "setup": {
         "note": "On the unit's panel: if the buttons do nothing, hold MODE for 3 seconds to unlock it. Press MODE until the address shows (A001 for address 1), press ENTER once, then UP or DOWN until it reads Ch08.",
-        "source": "ADJ 5PX Hex / 5PX Hex Pearl User Manual, document version 3 (02/19/21, for software 1.19 and later), p.16 (Operating Instructions, DMX Mode, steps 2-3) and p.15 (Control Panel Lock). The manual's bullets under step 3 say to press MODE until the mode shows, which contradicts step 3 itself. The note follows steps 2-3, whose ENTER is what the unit did. On the bench, 2026-10-23, unit 1900:88B261B3 on firmware V1.22: unlocked, one ENTER from A001 showed the mode the unit was in (Ch06 after a SET to personality 1 over RDM). Changing it with UP or DOWN was not itself pressed there."
+        "source": "ADJ 5PX Hex / 5PX Hex Pearl User Manual, document version 3 (02/19/21, for software 1.19 and later), p.16 (Operating Instructions, DMX Mode, steps 2-3) and p.15 (Control Panel Lock). The manual's bullets under step 3 say to press MODE until the mode shows, which contradicts step 3 itself. The note follows steps 2-3, whose ENTER is what the unit did. On the bench, 2026-10-23, one unit on firmware V1.22: unlocked, one ENTER from A001 showed the mode the unit was in (Ch06 after a SET to personality 1 over RDM). Changing it with UP or DOWN was not itself pressed there."
       }
     },
     {
@@ -244,7 +244,7 @@
             "note": "Dimmer Modes: 0-20 is Standard; 101-255 defers to the unit's own setting"
           }
         ],
-        "source": "ADJ 5PX Hex / 5PX Hex Pearl User Manual, p.11 (DMX Traits & Values, 12CH) and pp.12-13 (Color Macro Chart). Confirmed on the RDMBench bench on 2026-09-22, unit 1900:88B261B3 on firmware V1.22: every slot at 255 for 150 s lit the unit UV only (checked by eye) and moved its temperature 25 -> 26 C; the same hold with channels 9, 10 and 12 at 0 lit all six emitters and moved it 25 -> 29 C."
+        "source": "ADJ 5PX Hex / 5PX Hex Pearl User Manual, p.11 (DMX Traits & Values, 12CH) and pp.12-13 (Color Macro Chart). Confirmed on the RDMBench bench on 2026-09-22, one unit on firmware V1.22: every slot at 255 for 150 s lit the unit UV only (checked by eye) and moved its temperature 25 -> 26 C; the same hold with channels 9, 10 and 12 at 0 lit all six emitters and moved it 25 -> 29 C."
       },
       "slots": {
         "slots": [
@@ -488,13 +488,13 @@
           }
         ],
         "source": "ADJ 5PX Hex / 5PX Hex Pearl User Manual, p.11 (DMX Traits & Values: names, and the bands of channels 8, 10, 11 and 12) and pp.12-13 (Color Macro Chart: channel 9's bands, read from which emitters each macro uses). The 6, 7 and 8 channel modes are the first 6, 7 and 8 channels of the 12 channel one, as the manual's table lays them out.",
-        "starts_source": "The RDMBench bench's own choice, not the manual's, which gives ranges and no defaults. Every emitter at 0, the master dimmer at full, the strobe on LED On (255) and channels 9-12 at 0 (macro Off, programs No Function, speed 0, Standard dimmer mode — the levels the load plan holds them at): a unit that is ready and dark, lit by raising one colour. Confirmed on 2026-10-01, unit 1900:88B261B3 on firmware V1.22 in 12CH: red, master dimmer and strobe at 255 with nothing else sent lit it solid red (checked by eye).",
-        "with_source": "The RDMBench bench's own choice, not the manual's. With every emitter at its start (0), the master dimmer and the strobe change light no other channel is making, so a channel walk showed nothing on either and a tech failed healthy channels (2026-10-03, unit 1900:88B261B3 on firmware V1.22 in 12CH). So each is walked with white at full: the brightest single emitter and the easiest light to judge a dim or a strobe against.",
-        "by_eye_source": "Found on the RDMBench bench, 2026-10-05, unit 1900:88B261B3 on firmware V1.22 in 12CH: with White 255, Master Dimmer 64 and Strobe on LED On held, Dimmer Modes at 30 (Stage), 50 (TV), 70 (Architectural) and 90 (Theatre), each 12 s with 0 (Standard) between, all looked the same as Standard, watched by eye; the same was seen on two walks with White at 64 on 2026-10-03. Most likely the modes change how a level fades, which no held level shows — not yet confirmed."
+        "starts_source": "The RDMBench bench's own choice, not the manual's, which gives ranges and no defaults. Every emitter at 0, the master dimmer at full, the strobe on LED On (255) and channels 9-12 at 0 (macro Off, programs No Function, speed 0, Standard dimmer mode — the levels the load plan holds them at): a unit that is ready and dark, lit by raising one colour. Confirmed on 2026-10-01, one unit on firmware V1.22 in 12CH: red, master dimmer and strobe at 255 with nothing else sent lit it solid red (checked by eye).",
+        "with_source": "The RDMBench bench's own choice, not the manual's. With every emitter at its start (0), the master dimmer and the strobe change light no other channel is making, so a channel walk showed nothing on either and a tech failed healthy channels (2026-10-03, one unit on firmware V1.22 in 12CH). So each is walked with white at full: the brightest single emitter and the easiest light to judge a dim or a strobe against.",
+        "by_eye_source": "Found on the RDMBench bench, 2026-10-05, one unit on firmware V1.22 in 12CH: with White 255, Master Dimmer 64 and Strobe on LED On held, Dimmer Modes at 30 (Stage), 50 (TV), 70 (Architectural) and 90 (Theatre), each 12 s with 0 (Standard) between, all looked the same as Standard, watched by eye; the same was seen on two walks with White at 64 on 2026-10-03. Most likely the modes change how a level fades, which no held level shows — not yet confirmed."
       },
       "setup": {
         "note": "On the unit's panel: if the buttons do nothing, hold MODE for 3 seconds to unlock it. Press MODE until the address shows (A001 for address 1), press ENTER once, then UP or DOWN until it reads Ch12.",
-        "source": "ADJ 5PX Hex / 5PX Hex Pearl User Manual, document version 3 (02/19/21, for software 1.19 and later), p.16 (Operating Instructions, DMX Mode, steps 2-3) and p.15 (Control Panel Lock). The manual's bullets under step 3 say to press MODE until the mode shows, which contradicts step 3 itself. The note follows steps 2-3, whose ENTER is what the unit did. On the bench, 2026-10-23, unit 1900:88B261B3 on firmware V1.22: unlocked, one ENTER from A001 showed the mode the unit was in (Ch06 after a SET to personality 1 over RDM). Changing it with UP or DOWN was not itself pressed there."
+        "source": "ADJ 5PX Hex / 5PX Hex Pearl User Manual, document version 3 (02/19/21, for software 1.19 and later), p.16 (Operating Instructions, DMX Mode, steps 2-3) and p.15 (Control Panel Lock). The manual's bullets under step 3 say to press MODE until the mode shows, which contradicts step 3 itself. The note follows steps 2-3, whose ENTER is what the unit did. On the bench, 2026-10-23, one unit on firmware V1.22: unlocked, one ENTER from A001 showed the mode the unit was in (Ch06 after a SET to personality 1 over RDM). Changing it with UP or DOWN was not itself pressed there."
       }
     }
   ],
@@ -526,30 +526,30 @@
     "0x00E1",
     "0x0400"
   ],
-  "source": "Captured by RDMBench 0.1.0 from the fixture's own DEVICE_INFO / DMX_PERSONALITY_DESCRIPTION / SENSOR_DEFINITION: 5PX/12PX, software V1.22, unit 1900:88B261B3, 2026-09-22",
+  "source": "Captured by RDMBench 0.1.0 from the fixture's own DEVICE_INFO / DMX_PERSONALITY_DESCRIPTION / SENSOR_DEFINITION: 5PX/12PX, software V1.22, one unit, 2026-09-22",
   "quirks": [
     {
       "kind": "identify-inverted",
-      "source": "Observed on the RDMBench bench on 2026-09-21, unit 1900:88B261B3 on firmware V1.22. Method: DMX State set to bLC so that with no DMX on the line the resting state is unambiguously dark, then IDENTIFY_DEVICE toggled with nothing else on the line — 1 (identify on) leaves the unit fully dark, 0 (identify off) makes it blink. Both directions, repeated. The unit also powers up in the state it reports as identifying."
+      "source": "Observed on the RDMBench bench on 2026-09-21, one unit on firmware V1.22. Method: DMX State set to bLC so that with no DMX on the line the resting state is unambiguously dark, then IDENTIFY_DEVICE toggled with nothing else on the line — 1 (identify on) leaves the unit fully dark, 0 (identify off) makes it blink. Both directions, repeated. The unit also powers up in the state it reports as identifying."
     },
     {
       "kind": "footprint-stuck",
-      "source": "Observed on the RDMBench bench on 2026-10-23, unit 1900:88B261B3 on firmware V1.22, by rdmbench sweep through an Art-Net node: every SET of DMX_PERSONALITY was ACKed and read back, and DEVICE_INFO's personality byte followed it, but its DMX footprint read 0x000C (12) in all four personalities, while DMX_PERSONALITY_DESCRIPTION gave 6, 7, 8 and 12 (E1.20 §10.5.1 makes DEVICE_INFO's footprint the current personality's). The descriptions agree with the manual's DMX traits table (p. 11) and the unit's panel reads Ch06 in personality 1. Confirmed by DMX on 2026-10-24 through an Enttec DMX USB Pro: channel 1 at 255 and every other slot 0 lights the unit red in CH6 and leaves it dark in CH12 (channel 7, the Master Dimmer, at 0), so in CH6 it listens to six channels and the 12 is the stale number."
+      "source": "Observed on the RDMBench bench on 2026-10-23, one unit on firmware V1.22, by rdmbench sweep through an Art-Net node: every SET of DMX_PERSONALITY was ACKed and read back, and DEVICE_INFO's personality byte followed it, but its DMX footprint read 0x000C (12) in all four personalities, while DMX_PERSONALITY_DESCRIPTION gave 6, 7, 8 and 12 (E1.20 §10.5.1 makes DEVICE_INFO's footprint the current personality's). The descriptions agree with the manual's DMX traits table (p. 11) and the unit's panel reads Ch06 in personality 1. Confirmed by DMX on 2026-10-24 through an Enttec DMX USB Pro: channel 1 at 255 and every other slot 0 lights the unit red in CH6 and leaves it dark in CH12 (channel 7, the Master Dimmer, at 0), so in CH6 it listens to six channels and the 12 is the stale number."
     },
     {
       "kind": "fails-check",
       "check": "format-error-on-bad-pdl",
-      "source": "Observed on the RDMBench bench on 2026-09-21, unit 1900:88B261B3 on firmware V1.22, by rdmbench-cli behaviour: a GET DEVICE_INFO carrying four bytes of parameter data the PID does not define was answered with an ACK rather than refused (E1.20 §6.3.4). Reproduced from the unit's own wire log."
+      "source": "Observed on the RDMBench bench on 2026-09-21, one unit on firmware V1.22, by rdmbench-cli behaviour: a GET DEVICE_INFO carrying four bytes of parameter data the PID does not define was answered with an ACK rather than refused (E1.20 §6.3.4). Reproduced from the unit's own wire log."
     },
     {
       "kind": "fails-check",
       "check": "all-call-get-refused",
-      "source": "Observed on the RDMBench bench on 2026-09-21, unit 1900:88B261B3 on firmware V1.22, by rdmbench-cli behaviour: a GET DEVICE_INFO addressed to SUB_DEVICE_ALL_CALL (0xFFFF) was answered rather than NACKed (E1.20 §9.2.2). Reproduced from the unit's own wire log."
+      "source": "Observed on the RDMBench bench on 2026-09-21, one unit on firmware V1.22, by rdmbench-cli behaviour: a GET DEVICE_INFO addressed to SUB_DEVICE_ALL_CALL (0xFFFF) was answered rather than NACKed (E1.20 §9.2.2). Reproduced from the unit's own wire log."
     },
     {
       "kind": "fails-check",
       "check": "text-printable-ascii",
-      "source": "Observed on the RDMBench bench on 2026-09-22, unit 1900:88B261B3 on firmware V1.22, by rdmbench-cli behaviour: three of the eight text fields it answered carry bytes outside printable ASCII (E1.20 §10.1) — DMX_PERSONALITY_DESCRIPTION 4 reads 43 48 31 32 99 AE and personality 1 reads 43 48 36 00 08, a short name with a NUL and uncleared bytes after it in a fixed-length field. Reproduced from the unit's own wire log."
+      "source": "Observed on the RDMBench bench on 2026-09-22, one unit on firmware V1.22, by rdmbench-cli behaviour: three of the eight text fields it answered carry bytes outside printable ASCII (E1.20 §10.1) — DMX_PERSONALITY_DESCRIPTION 4 reads 43 48 31 32 99 AE and personality 1 reads 43 48 36 00 08, a short name with a NUL and uncleared bytes after it in a fixed-length field. Reproduced from the unit's own wire log."
     }
   ]
 }

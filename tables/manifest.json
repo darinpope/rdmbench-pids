@@ -1,11 +1,11 @@
 {
-  "version": "20261030.1",
+  "version": "20261030.2",
   "files": {
     "martin-professional.json": "9289256250f20cbbdf2403828d5fce71334427c52cb26a065f70e4b8eb4713cf",
     "vari-lite.json": "dded0540b22e98b4e8b183d38dbeea3e53a9bd4632ec883c84dc50d8bfa93a7a"
   },
   "models": {
-    "adj/5px-12px.json": "068cd1e4148e0196f44226592656bc7009a171e68a504d822eaa72c4c663c069",
-    "shehds/glamopar-07a.json": "5db60fb44cb028d013c1c2193e17f828cbbc15d46ca43549f563a1f63970a367"
+    "adj/5px-12px.json": "ed6f390bbb31f77a97a9f66445528204b35f07ce1cd3aa04966462961ca820b5",
+    "shehds/glamopar-07a.json": "f01d1b4ea87d0a5073338c222870a23a547b04d261dbac9bb4c362ffff0c4c4e"
   }
 }
