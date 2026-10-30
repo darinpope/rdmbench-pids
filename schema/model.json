@@ -140,7 +140,7 @@
       "pattern": "^(0[xX])?[0-9A-Fa-f]{1,8}$"
     },
     "LoadPlan": {
-      "description": "The channels of one personality that a load test must hold at a level\nof their own rather than at full.\n\nThe case that filed it: an ADJ 5PX HEX in its 12-channel personality\nwith every slot at 255 lights **UV only**, because channel 9 is a\ncolour macro whose top value overrides the emitters (`docs/bench.md`,\n\"The load tool meets the 5PX\"). A tech reads that out of the manual;\nan assistant asked to drive the fixture has no manual, so the profile\ncarries it. A fact about the model rather than a fault in it, which is\nwhy it is not a [`Quirk`] — and a fact about one personality, since\nthe same channel number means something else in another.",
+      "description": "The channels of one personality that a load test must hold at a level\nof their own rather than at full.\n\nThe case that filed it: an ADJ 5PX HEX in its 12-channel personality\nwith every slot at 255 lights **UV only**, because channel 9 is a\ncolour macro whose top value overrides the emitters. A tech reads that\nout of the manual;\nan assistant asked to drive the fixture has no manual, so the profile\ncarries it. A fact about the model rather than a fault in it, which is\nwhy it is not a [`Quirk`] — and a fact about one personality, since\nthe same channel number means something else in another.",
       "type": "object",
       "properties": {
         "slots": {
@@ -262,7 +262,7 @@
       "type": "object",
       "properties": {
         "by_eye": {
-          "description": "`false` for a channel whose effect no held level shows, so a\nperson cannot judge it by eye: the channel walk rests it rather\nthan walking it, and says why. The 5PX's Dimmer Modes looked the\nsame in every mode under a held level (`docs/bench.md`) — a curve\nthat changes how a level fades, not where it sits. Absent is\n`true`, every other channel.",
+          "description": "`false` for a channel whose effect no held level shows, so a\nperson cannot judge it by eye: the channel walk rests it rather\nthan walking it, and says why. The 5PX's Dimmer Modes looked the\nsame in every mode under a held level — a curve that changes how a\nlevel fades, not where it sits. Absent is `true`, every other\nchannel.",
           "type": "boolean"
         },
         "channel": {
@@ -294,7 +294,7 @@
           "minimum": 0
         },
         "with": {
-          "description": "What else to hold while this channel is walked, for a channel that\nonly changes light another one makes — a master dimmer, a strobe, a\ndimmer curve. On its own, with every emitter at rest, it shows\nnothing, and a tech fails a healthy channel (the 5PX's first walk,\n`docs/bench.md`). Not a walk plan: one list of levels, nothing else.",
+          "description": "What else to hold while this channel is walked, for a channel that\nonly changes light another one makes — a master dimmer, a strobe, a\ndimmer curve. On its own, with every emitter at rest, it shows\nnothing, and a tech fails a healthy channel (the 5PX's first\nwalk). Not a walk plan: one list of levels, nothing else.",
           "type": "array",
           "items": {
             "$ref": "#/$defs/HeldLevel"
@@ -427,7 +427,7 @@
       ]
     },
     "SetupNote": {
-      "description": "How to put a unit in one personality from its own panel — \"Menu →\nPersonality → Extended, then Color Calibration → On\" — which is what a\nwrong-mode row is for: telling the tech what to do at the fixture.\n\nA grandMA2's fixture types carry the same line (\"Set menu option … for\nthis personality\"), and the patch check quotes the desk's where it has\none, but MA's text is a third-party dataset and never copied here\n(`docs/decisions.md`, \"Not a channel-layout library\"). This is the\ncurator's, from the manufacturer's manual.",
+      "description": "How to put a unit in one personality from its own panel — \"Menu →\nPersonality → Extended, then Color Calibration → On\" — which is what a\nwrong-mode row is for: telling the tech what to do at the fixture.\n\nA grandMA2's fixture types carry the same line (\"Set menu option … for\nthis personality\"), and the patch check quotes the desk's where it has\none, but MA's text is a third-party dataset and never copied here.\nThis is the curator's, from the manufacturer's manual.",
       "type": "object",
       "properties": {
         "note": {
@@ -445,7 +445,7 @@
       ]
     },
     "SlotLayout": {
-      "description": "One personality's channels written down from the manual: in effect\nSLOT_INFO, SLOT_DESCRIPTION and DEFAULT_SLOT_VALUE for a fixture that\nimplements none of them.\n\nThe case that filed it: the ADJ 5PX HEX reports no slot table, and\n\"Send DMX…\" could only light it by a tech typing channel numbers out of\nthe manual — one channel is dark (master dimmer at 0) and one level is\nUV only (colour macro at full), `docs/bench.md`. Not the [`LoadPlan`]:\nthat answers what to drive in order to *measure*, this what each\nchannel *is* and where to rest it.",
+      "description": "One personality's channels written down from the manual: in effect\nSLOT_INFO, SLOT_DESCRIPTION and DEFAULT_SLOT_VALUE for a fixture that\nimplements none of them.\n\nThe case that filed it: the ADJ 5PX HEX reports no slot table, and\n\"Send DMX…\" could only light it by a tech typing channel numbers out of\nthe manual — one channel is dark (master dimmer at 0) and one level is\nUV only (colour macro at full). Not the [`LoadPlan`]: that answers\nwhat to drive in order to *measure*, this what each channel *is* and\nwhere to rest it.",
       "type": "object",
       "properties": {
         "by_eye_source": {
