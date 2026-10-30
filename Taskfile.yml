@@ -90,6 +90,60 @@ tasks:
     cmds:
       - '{{.CLI}} pid-timestamp tables --check'
 
+  site:
+    desc: |
+      Put this release on www.rdmbench.com/fixtures/: move rdmbench-site's
+      pin to this repo's main, run the site's tests, commit and push, which
+      deploys it. Run after the release is pushed; the site reads the library
+      only at the commit go.mod pins, and nothing else moves it. Needs a
+      checkout of rdmbench-site beside this one (SITE=… for another path),
+      clean and on main. A quirk kind the site cannot describe fails its
+      build here, before anything goes live: describe it in the site's
+      layouts/_partials/fixtures/quirk.html.
+    vars:
+      SITE: '{{.SITE | default "../rdmbench-site"}}'
+    silent: true
+    cmds:
+      - |
+        set -e
+        git fetch -q origin main
+        test -z "$(git status --porcelain)" || { echo "rdmbench-pids has uncommitted changes"; exit 1; }
+        test "$(git rev-parse HEAD)" = "$(git rev-parse origin/main)" || { echo "rdmbench-pids HEAD is not origin/main: push the release first"; exit 1; }
+        commit=$(git rev-parse HEAD)
+        version=$(sed -n 's/^ *"version": *"\([^"]*\)".*/\1/p' tables/manifest.json | head -1)
+        cd "{{.SITE}}"
+        test -z "$(git status --porcelain)" || { echo "{{.SITE}} has uncommitted changes"; exit 1; }
+        test "$(git branch --show-current)" = main || { echo "{{.SITE}} is not on main"; exit 1; }
+        git pull -q --ff-only
+        node scripts/hugo.js mod get "github.com/darinpope/rdmbench-pids@$commit"
+        if git diff --quiet go.mod go.sum; then
+          echo "the site already pins $commit"
+          exit 0
+        fi
+        npm test
+        git add go.mod go.sum
+        git commit -q -m "Fixtures: library $version" -m "rdmbench-pids $commit, by its task site."
+        git push -q
+        echo "rdmbench-site pins library $version ($commit); Workers Builds is deploying it"
+
+  site:check:
+    desc: |
+      Whether www.rdmbench.com/fixtures/ shows this checkout's library
+      version. Reads the live page, so it needs no access to rdmbench-site;
+      the daily rdmbench/pids-timestamp job runs the same check. If it
+      fails, run `task site`.
+    silent: true
+    cmds:
+      - |
+        want=$(sed -n 's/^ *"version": *"\([^"]*\)".*/\1/p' tables/manifest.json | head -1)
+        live=$(curl -fsS https://www.rdmbench.com/fixtures/index.md | sed -n 's/^- \*\*Library version:\*\* //p')
+        if [ "$want" = "$live" ]; then
+          echo "www.rdmbench.com/fixtures/ shows library $live"
+        else
+          echo "www.rdmbench.com/fixtures/ shows library ${live:-nothing}, not $want: run task site"
+          exit 1
+        fi
+
   timestamp:
     desc: |
       Sign tables/timestamp.json — that the manifest is current, for 30 days —
