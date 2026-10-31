@@ -1,0 +1,174 @@
+{
+  "manufacturer_id": "0x4D50",
+  "manufacturer": "Martin Professional A/S",
+  "model_id": "0x0003",
+  "model": "MAC AURA",
+  "product_category": "Fixture (moving yoke)",
+  "product_category_id": "0x0102",
+  "software_version_id": "0x000005A6",
+  "software_version": "MAC AURA 1.2.0",
+  "protocol_version": "1.0",
+  "sub_device_count": 0,
+  "personalities": [
+    {
+      "number": 1,
+      "name": "Standard",
+      "footprint": 14
+    },
+    {
+      "number": 2,
+      "name": "Extended",
+      "footprint": 25
+    }
+  ],
+  "sensors": [
+    {
+      "number": 0,
+      "name": "PCB temperature",
+      "kind": "temperature",
+      "unit": "°C",
+      "range": [
+        -10.0,
+        80.0
+      ],
+      "normal": [
+        10.0,
+        70.0
+      ],
+      "records_lowest_highest": false,
+      "records_value": true
+    },
+    {
+      "number": 1,
+      "name": "LED beam temperature",
+      "kind": "temperature",
+      "unit": "°C",
+      "range": [
+        -10.0,
+        80.0
+      ],
+      "normal": [
+        10.0,
+        70.0
+      ],
+      "records_lowest_highest": false,
+      "records_value": true
+    },
+    {
+      "number": 2,
+      "name": "LED aura temperature",
+      "kind": "temperature",
+      "unit": "°C",
+      "range": [
+        -10.0,
+        80.0
+      ],
+      "normal": [
+        10.0,
+        70.0
+      ],
+      "records_lowest_highest": false,
+      "records_value": true
+    },
+    {
+      "number": 3,
+      "name": "PCB voltage",
+      "kind": "voltage",
+      "unit": "V",
+      "range": [
+        0.0,
+        30.0
+      ],
+      "normal": [
+        20.0,
+        30.0
+      ],
+      "records_lowest_highest": false,
+      "records_value": true
+    },
+    {
+      "number": 4,
+      "name": "LED voltage",
+      "kind": "voltage",
+      "unit": "V",
+      "range": [
+        0.0,
+        90.0
+      ],
+      "normal": [
+        80.0,
+        90.0
+      ],
+      "records_lowest_highest": false,
+      "records_value": true
+    },
+    {
+      "number": 5,
+      "name": "Device Power Cycles",
+      "kind": "counter",
+      "unit": "",
+      "range": [
+        -32768.0,
+        32767.0
+      ],
+      "normal": [
+        -32768.0,
+        32767.0
+      ],
+      "records_lowest_highest": false,
+      "records_value": false
+    },
+    {
+      "number": 6,
+      "name": "Device Lifetime Hours",
+      "kind": "counter",
+      "unit": "",
+      "range": [
+        -32768.0,
+        32767.0
+      ],
+      "normal": [
+        -32768.0,
+        32767.0
+      ],
+      "records_lowest_highest": false,
+      "records_value": false
+    }
+  ],
+  "supported_parameters": [
+    "0x0020",
+    "0x0030",
+    "0x0031",
+    "0x0032",
+    "0x0050",
+    "0x0051",
+    "0x0080",
+    "0x0081",
+    "0x0082",
+    "0x0090",
+    "0x00E0",
+    "0x00E1",
+    "0x0121",
+    "0x0200",
+    "0x0201",
+    "0x0400",
+    "0x0405",
+    "0x0501",
+    "0x0600",
+    "0x0601",
+    "0x0602",
+    "0x1001",
+    "0x1020",
+    "0x1021",
+    "0x8001",
+    "0x8308",
+    "0x8310",
+    "0x8312",
+    "0x8400",
+    "0x8604",
+    "0x8700",
+    "0x8703",
+    "0x8704"
+  ],
+  "source": "Captured by RDMBench 0.8.0 from the fixture's own DEVICE_INFO / DMX_PERSONALITY_DESCRIPTION / SENSOR_DEFINITION: MAC AURA, software MAC AURA 1.2.0, 2026-10-31"
+}
