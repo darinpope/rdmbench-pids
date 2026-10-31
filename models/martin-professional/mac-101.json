@@ -1,0 +1,51 @@
+{
+  "manufacturer_id": "0x4D50",
+  "manufacturer": "Martin Professional A/S",
+  "model_id": "0x04C4",
+  "model": "MAC 101",
+  "product_category": "Fixture (moving yoke)",
+  "product_category_id": "0x0102",
+  "software_version_id": "0x0000058D",
+  "software_version": "MAC 101 1.5.0",
+  "protocol_version": "1.0",
+  "sub_device_count": 0,
+  "personalities": [
+    {
+      "number": 1,
+      "name": "Basic",
+      "footprint": 8
+    },
+    {
+      "number": 2,
+      "name": "RGB",
+      "footprint": 12
+    },
+    {
+      "number": 3,
+      "name": "RAW",
+      "footprint": 12
+    }
+  ],
+  "sensors": [],
+  "supported_parameters": [
+    "0x0050",
+    "0x0051",
+    "0x0080",
+    "0x0081",
+    "0x0082",
+    "0x00E0",
+    "0x00E1",
+    "0x0121",
+    "0x0600",
+    "0x0601",
+    "0x0602",
+    "0x1001",
+    "0x8700",
+    "0x8703",
+    "0x8704",
+    "0x8705",
+    "0x8706",
+    "0x8707"
+  ],
+  "source": "Captured by RDMBench 0.8.0 from the fixture's own DEVICE_INFO / DMX_PERSONALITY_DESCRIPTION / SENSOR_DEFINITION: MAC 101, software MAC 101 1.5.0, 2026-10-31"
+}
