@@ -178,5 +178,11 @@
     "0x8703",
     "0x8704"
   ],
-  "source": "Captured by RDMBench 0.8.0 from the fixture's own DEVICE_INFO / DMX_PERSONALITY_DESCRIPTION / SENSOR_DEFINITION: MAC AURA, software MAC AURA 1.2.0, 2026-10-31"
+  "source": "Captured by RDMBench 0.8.0 from the fixture's own DEVICE_INFO / DMX_PERSONALITY_DESCRIPTION / SENSOR_DEFINITION: MAC AURA, software MAC AURA 1.2.0, 2026-10-31",
+  "quirks": [
+    {
+      "kind": "footprint-stuck",
+      "source": "Observed on the RDMBench bench on 2026-10-31, one unit (4D50:0113201E) on firmware MAC AURA 1.2.0, through an Enttec DMX USB Pro: in personality 2, Extended, entered both by SET DMX_PERSONALITY and by its own self-test, DEVICE_INFO's DMX footprint read 0x000E (14), Standard's, while DMX_PERSONALITY_DESCRIPTION gave 25 (E1.20 §10.5.1 makes DEVICE_INFO's footprint the current personality's). The 25 agrees with the manual (UM_MACAura_EN_B, p. 11: Extended uses 25 DMX channels), so the 14 is the stale number. Not yet confirmed by a DMX frame on channels 15-25."
+    }
+  ]
 }
