@@ -116,7 +116,11 @@
         32767.0
       ],
       "records_lowest_highest": false,
-      "records_value": false
+      "records_value": false,
+      "total": {
+        "of": "power_cycles",
+        "source": "RDMBench bench, 2026-10-31: ten units on firmware 1.2.0 read on one rig. On five, DEVICE_POWER_CYCLES was exactly 4 under this sensor; on the other five it was far under it (4D50:010899D5 read 1 against 1,056), with DEVICE_HOURS reset alongside. The counter was reset and this sensor kept the total."
+      }
     },
     {
       "number": 6,
@@ -132,7 +136,11 @@
         32767.0
       ],
       "records_lowest_highest": false,
-      "records_value": false
+      "records_value": false,
+      "total": {
+        "of": "device_hours",
+        "source": "RDMBench bench, 2026-10-31: ten units on firmware 1.2.0 read on one rig. On five, DEVICE_HOURS was 2-3 h under this sensor; on the other five it was far under it (4D50:010899D5 read 5 h against 10,041), with DEVICE_POWER_CYCLES reset alongside. The counter was reset and this sensor kept the total."
+      }
     }
   ],
   "supported_parameters": [

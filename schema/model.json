@@ -349,6 +349,11 @@
           "const": "footprint-stuck"
         },
         {
+          "description": "A SET of DEVICE_LABEL (§10.5.5) is dropped without a reply: the\nunit lists the PID and answers its GET, so nothing short of trying\nsays it will not take a name, and the silence where E1.20 wants\n`NR_UNSUPPORTED_COMMAND_CLASS` (§6.3.4) reads as the line gone\nquiet. What the entry changes is Set Label…'s sentence, before\nsending and in place of the timeout; the SET still goes, since a\nlater firmware may take it and the key is the model, not the\nfirmware.",
+          "type": "string",
+          "const": "label-ignored"
+        },
+        {
           "description": "A kind written by a newer build than this one. Carried through\nunchanged so a round trip does not drop it, and acted on by\nnothing: a bench that cannot name a quirk must not guess at it.",
           "type": "string"
         }
@@ -410,6 +415,17 @@
         "records_value": {
           "type": "boolean"
         },
+        "total": {
+          "description": "This sensor is the unit's own lifetime count of one of E1.20's\nresettable counters — see [`SensorTotal`]. Never written by\n[`capture_profile`]: a sensor's name is the fixture's own words, and\nonly a curator comparing it with the counter can say it is one.",
+          "anyOf": [
+            {
+              "$ref": "#/$defs/SensorTotal"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
         "unit": {
           "description": "Table A-13 unit symbol — `°C`, `V`, `%`. The range and normal\nlimits are scaled by the prefix, so it is not repeated here.",
           "type": "string"
@@ -424,6 +440,24 @@
         "normal",
         "records_lowest_highest",
         "records_value"
+      ]
+    },
+    "SensorTotal": {
+      "description": "A sensor that keeps the lifetime figure of a counter E1.20 lets anyone\nreset: DEVICE_HOURS, LAMP_HOURS, LAMP_STRIKES or DEVICE_POWER_CYCLES\n(§10.8). Where a model has one, the report shows the counter and the\nlifetime side by side and says when the counter was reset.\n\nThe case that filed it: an original MAC Aura answers DEVICE_HOURS and\nDEVICE_POWER_CYCLES with counters that can be reset, and keeps the\ntotals in its sensors `Device Lifetime Hours` and `Device Power\nCycles`. One unit's counter read 5 h against its sensor's 10,041. Keyed\non the sensor's number in this file and never on its name, which is\nthe fixture's wording.",
+      "type": "object",
+      "properties": {
+        "of": {
+          "description": "Which counter the sensor is the lifetime figure of.",
+          "$ref": "#/$defs/TotalOf"
+        },
+        "source": {
+          "description": "How it was established: the units compared, the method, the date.\nRequired, as a quirk's is: it changes the hours a tech reads.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "of",
+        "source"
       ]
     },
     "SetupNote": {
@@ -511,6 +545,24 @@
         "from",
         "to",
         "meaning"
+      ]
+    },
+    "TotalOf": {
+      "description": "The counters a [`SensorTotal`] can be the lifetime figure of, named as\na report's counters are.",
+      "anyOf": [
+        {
+          "type": "string",
+          "enum": [
+            "device_hours",
+            "lamp_hours",
+            "lamp_strikes",
+            "power_cycles"
+          ]
+        },
+        {
+          "description": "A counter named by a newer build than this one. Carried through\nunchanged and read as nothing, as an unknown quirk is.",
+          "type": "string"
+        }
       ]
     }
   }
