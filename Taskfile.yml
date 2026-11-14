@@ -130,7 +130,7 @@ tasks:
     desc: |
       Whether www.rdmbench.com/fixtures/ shows this checkout's library
       version. Reads the live page, so it needs no access to rdmbench-site;
-      the daily rdmbench/pids-timestamp job runs the same check. If it
+      the daily rdmbench/signed/pids-timestamp job runs the same check. If it
       fails, run `task site`.
     silent: true
     cmds:
